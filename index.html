@@ -1,198 +1,528 @@
-<!DOCTYPE html><html lang="pt-BR"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#152012"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>Um momento com Deus · Rob</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap');
-:root{--bg:#f4f0e7;--paper:#fffdf8;--ink:#182015;--muted:#73776d;--line:#dedbd0;--green:#152012;--green2:#35462e;--soft:#e2eacb;--red:#b20000;--gold:#c4a15a;--ease:cubic-bezier(.2,.8,.2,1);--nav:78px}
-*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 10% 0%,#e8edda 0,transparent 28%),radial-gradient(circle at 100% 20%,#f2dfc9 0,transparent 25%),var(--bg);color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden;padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom))}button,input,textarea{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button:active{transform:scale(.96)}.wrap{width:min(760px,calc(100% - 36px));margin:auto}.screen{display:none;min-height:calc(100vh - var(--nav));animation:screenIn .42s var(--ease)}.screen.active{display:block}@keyframes screenIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}.fadeOut{animation:screenOut .18s ease}@keyframes screenOut{to{opacity:0;transform:translateX(-12px)}}
-/* header */
-.app-header{height:74px;padding-top:env(safe-area-inset-top);display:flex;align-items:center;justify-content:space-between;width:min(760px,calc(100% - 36px));margin:auto}.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.04em}.mark{width:38px;height:38px;border-radius:14px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:18px}.head-btn{width:40px;height:40px;border:1px solid var(--line);background:#ffffffb5;border-radius:50%;display:grid;place-items:center;color:var(--ink)}
-/* home */
-.home-hero{padding:30px 0 38px}.eyebrow{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--green2)}.home-title{font:800 clamp(55px,15vw,82px)/.82 "DM Sans",sans-serif;letter-spacing:-.075em;margin:15px 0 17px}.home-title .serif{font:400 1.02em/.82 "DM Serif Display",serif;font-style:italic;color:#2458e8;letter-spacing:-.06em}.home-copy{font-size:15px;line-height:1.65;color:var(--muted);max-width:560px}.today-card{margin-top:32px;background:var(--green);color:white;border-radius:34px;padding:27px;min-height:330px;position:relative;overflow:hidden;box-shadow:0 24px 60px #15201220;transition:.35s var(--ease)}.today-card:before{content:'*';position:absolute;font:240px/1 "DM Serif Display";right:-20px;top:-50px;color:#ffffff0d}.today-card .mini{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#ffffff99;font-weight:800;position:relative}.today-card h2{font:400 39px/1.02 "DM Serif Display",serif;letter-spacing:-.04em;max-width:480px;margin:52px 0 20px;position:relative}.today-verse{border-left:2px solid var(--gold);padding-left:14px;font:17px/1.45 "DM Serif Display",serif;color:#fffde5;position:relative}.today-ref{display:block;color:#ffffff8c;font:10px "DM Sans";margin-top:7px;text-transform:uppercase;letter-spacing:.1em}.primary{margin-top:24px;background:#fff;color:var(--green);border:0;border-radius:999px;padding:14px 18px;font-size:12px;font-weight:800;position:relative}.home-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.small-card{background:#ffffff9e;border:1px solid var(--line);border-radius:25px;padding:20px;min-height:135px}.small-card .big{font:36px "DM Serif Display";margin-top:10px}.small-card p{margin:4px 0 0;color:var(--muted);font-size:11px}.mantra-card{margin-top:12px;background:var(--soft);border-radius:25px;padding:22px;display:flex;gap:16px;align-items:center}.asterisk{font:52px/1 "DM Serif Display";color:var(--red)}.mantra-card strong{font:400 23px/1.08 "DM Serif Display"}.mantra-card span{display:block;color:var(--muted);font-size:10px;margin-top:6px}
-/* list */
-.screen-title{padding:24px 0 20px}.screen-title h1{font:400 49px/.95 "DM Serif Display",serif;letter-spacing:-.05em;margin:7px 0}.screen-title p{color:var(--muted);font-size:13px;line-height:1.5}.search{width:100%;border:1px solid var(--line);background:#ffffffb5;border-radius:18px;padding:14px 16px;outline:0;margin-bottom:12px}.filters{display:flex;gap:7px;overflow:auto;padding-bottom:6px}.filter{white-space:nowrap;border:1px solid var(--line);background:#ffffffa8;border-radius:999px;padding:9px 13px;font-size:10px;font-weight:800}.filter.on{background:var(--green);color:white;border-color:var(--green)}.day-list{display:grid;gap:10px;padding:14px 0 35px}.day-item{border:1px solid var(--line);background:#ffffffa8;border-radius:25px;padding:18px;display:flex;gap:15px;align-items:center;text-align:left;width:100%;transition:.25s var(--ease)}.day-item:hover{transform:translateY(-2px);background:var(--paper)}.day-number{width:45px;height:45px;flex:0 0 45px;border-radius:15px;background:var(--soft);display:grid;place-items:center;font-weight:800}.day-info{min-width:0;flex:1}.day-info b{font:400 21px/1.05 "DM Serif Display";display:block}.day-info span{font-size:10px;color:var(--muted);display:block;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chev{font-size:20px;color:var(--muted)}
-/* reader */
-.reader-screen{background:var(--paper)}.reader-head{height:74px;padding-top:env(safe-area-inset-top);display:flex;align-items:center;justify-content:space-between;width:min(760px,calc(100% - 36px));margin:auto}.back{border:0;background:none;font-weight:800;font-size:12px;padding:8px 0}.reader-tools{display:flex;gap:7px}.circle{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center}.reader-content{width:min(680px,calc(100% - 40px));margin:auto;padding:35px 0 65px}.reader-meta{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:800}.reader-title{font:400 clamp(46px,12vw,72px)/.92 "DM Serif Display";letter-spacing:-.055em;margin:18px 0 33px}.big-verse{border-left:3px solid var(--gold);padding:2px 0 2px 19px;font:21px/1.5 "DM Serif Display";color:#555a50;margin-bottom:38px}.big-verse small{display:block;margin-top:8px;font:10px "DM Sans";color:var(--muted);text-transform:uppercase;letter-spacing:.1em}.label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--green2);font-weight:900;margin:31px 0 10px}.reader-content p{font:19px/1.72 "DM Serif Display";color:#34382f;margin:0}.takeaway{background:var(--soft);border-radius:22px;padding:22px;font:23px/1.35 "DM Serif Display"}.prayer{padding-bottom:20px}.reader-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:27px}.action{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:11px 14px;font-size:11px;font-weight:800}.action.dark{background:var(--green);border-color:var(--green);color:white}.action.liked{background:#f6dfdc;color:var(--red);border-color:#e6c0bb}.reader-next{margin-top:42px;border-top:1px solid var(--line);padding-top:23px;display:flex;justify-content:space-between;align-items:center}.reader-next button{border:0;background:none;text-align:right}.reader-next small{display:block;color:var(--muted);font-size:9px;text-transform:uppercase}.reader-next b{font:400 22px "DM Serif Display"}
-/* reflection */
-.reflect{padding-bottom:35px}.question{font:400 31px/1.1 "DM Serif Display";margin:22px 0}.textarea{width:100%;min-height:300px;border:1px solid var(--line);border-radius:27px;background:#fffdf8;padding:20px;resize:none;outline:0;font:18px/1.6 "DM Serif Display";color:var(--ink)}.save{width:100%;margin-top:10px;border:0;border-radius:18px;padding:16px;background:var(--green);color:white;font-weight:800}.saved-note{color:var(--muted);font-size:10px;text-align:center;margin-top:9px}
-/* favorites/progress */
-.empty{padding:70px 20px;text-align:center;color:var(--muted)}.empty .star{font:70px "DM Serif Display";color:var(--red)}.stats-big{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat-box{background:#ffffffa8;border:1px solid var(--line);border-radius:25px;padding:22px}.stat-box strong{font:48px "DM Serif Display"}.stat-box span{display:block;color:var(--muted);font-size:10px}.progress-track{height:10px;background:#dedfd6;border-radius:99px;overflow:hidden;margin:20px 0}.progress-track i{display:block;height:100%;background:var(--green);border-radius:inherit;transition:.6s var(--ease)}
-/* carousel */
-.dev-carousel{position:relative;margin-top:14px}.carousel-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:2px 2px 12px}.carousel-track::-webkit-scrollbar{display:none}.carousel-card{scroll-snap-align:start;min-width:86%;border:1px solid var(--line);background:#ffffffb5;border-radius:28px;padding:21px;text-align:left;position:relative;overflow:hidden}.carousel-card:after{content:"*";position:absolute;right:16px;bottom:-12px;font:80px/1 "DM Serif Display";color:#e2eacb;z-index:0}.carousel-card>*{position:relative;z-index:1}.carousel-card h3{font:400 28px/1.02 "DM Serif Display";margin:10px 0 13px}.carousel-card p{font:16px/1.55 "DM Serif Display";color:#555a50;margin:0}.carousel-card .mini{font-size:9px;letter-spacing:.14em;font-weight:900;color:var(--muted)}.carousel-dots{display:flex;justify-content:center;gap:5px;margin-top:2px}.carousel-dot{width:6px;height:6px;border-radius:50%;background:#c8cbbf;border:0;padding:0}.carousel-dot.on{width:18px;border-radius:99px;background:var(--green)}
-/* japamala */
-.mala-screen{background:var(--bg)}
-.mala-wrap{width:min(680px,calc(100% - 34px));margin:auto;padding-bottom:42px}
-.mala-head{padding:22px 0 15px;display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
-.mala-head h1{font:400 47px/.95 "DM Serif Display";letter-spacing:-.05em;margin:8px 0 7px}
-.mala-head p{font-size:12px;color:var(--muted);line-height:1.45;max-width:290px;margin:0}
-.mala-back{border:0;background:none;font-weight:800;font-size:12px;padding:8px 0;color:var(--ink)}
-.mala-reset{border:1px solid var(--line);background:#ffffffb5;width:40px;height:40px;border-radius:50%;font-size:18px;display:grid;place-items:center}
-.mala-card{background:var(--paper);border:1px solid var(--line);border-radius:34px;padding:24px 18px 20px;text-align:center;box-shadow:0 18px 45px #1820150d;overflow:hidden}
-.mala-count{font:400 62px/.9 "DM Serif Display";letter-spacing:-.06em}
-.mala-count span{font:13px "DM Sans";color:var(--muted);letter-spacing:.08em}
-.mala-hint{font-size:11px;color:var(--muted);margin:9px 0 17px}
-.mala-visual{height:430px;position:relative;overflow:hidden;margin:0 auto 14px;border-radius:28px;background:linear-gradient(180deg,#f7f4eb 0%,#f1eddf 100%);border:1px solid #e5e0d4}
-.mala-visual:before{content:'*';position:absolute;right:-12px;top:-42px;font:170px/1 "DM Serif Display";color:#b2000009;pointer-events:none}
-.mala-visual:after{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(transparent,#c4a15a55 16%,#c4a15a55 84%,transparent);transform:translateX(-50%);pointer-events:none}
-.mala-orbit{position:absolute;inset:0;display:flex;justify-content:center;align-items:flex-start;pointer-events:none}
-.mala-thread{position:absolute;left:50%;top:-80px;width:4px;height:590px;background:#b9a47b;border-radius:99px;transform:translateX(-50%);opacity:.75;box-shadow:0 0 0 1px #fff7}
-.mala-beads{position:absolute;left:50%;top:56px;width:78px;height:335px;transform:translateX(-50%);transition:transform .55s var(--ease)}
-.mala-bead{position:absolute;left:50%;width:31px;height:31px;padding:0;border-radius:50%;border:2px solid #cbd4ae;background:var(--soft);box-shadow:0 4px 12px #18201512;transform:translate(-50%,0);transition:transform .48s var(--ease),opacity .35s ease,background .35s ease,box-shadow .35s ease,border-color .35s ease;pointer-events:none}
-.mala-bead.done{background:var(--green);border-color:var(--green);box-shadow:0 4px 13px #1520122d}
-.mala-bead.current{width:52px;height:52px;background:var(--red);border-color:var(--red);box-shadow:0 0 0 9px #b2000012,0 10px 25px #b2000038;z-index:10;pointer-events:auto;cursor:pointer}
-.mala-bead.current:after{content:'';position:absolute;inset:9px;border:1px solid #ffffff55;border-radius:50%}
-.mala-bead.past{opacity:.96}
-.mala-bead.future{opacity:.48}
-.mala-meru{position:absolute;z-index:12;top:20px;left:50%;transform:translateX(-50%);width:54px;height:54px;border-radius:48% 48% 40% 40%;background:var(--green);color:#fff;display:grid;place-items:center;font:23px "DM Serif Display";box-shadow:0 8px 18px #1520122c}
-.mala-meru:after{content:'';position:absolute;bottom:-12px;left:50%;width:18px;height:15px;border-radius:0 0 10px 10px;background:var(--green);transform:translateX(-50%)}
-.mala-touch{position:absolute;z-index:14;bottom:19px;left:50%;transform:translateX(-50%);width:calc(100% - 34px);background:#fffdf8dd;border:1px solid #dedbd0;border-radius:20px;padding:10px 13px;backdrop-filter:blur(10px);font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--green);pointer-events:none}
-.mala-touch b{color:var(--red)}
-.mala-cta{width:100%;border:0;border-radius:22px;background:var(--green);color:white;padding:17px;font-weight:900;font-size:13px;box-shadow:0 12px 25px #15201222;transition:.25s var(--ease)}
-.mala-cta.done{background:var(--red)}
-.mala-actions{display:flex;gap:8px;margin-top:9px}
-.mala-actions button{flex:1;border:1px solid var(--line);background:var(--paper);border-radius:18px;padding:12px;font-size:10px;font-weight:800}
-.mala-phrase{margin-top:13px;background:var(--soft);border-radius:24px;padding:18px;text-align:left;min-height:92px}
-.mala-phrase .asterisk{font-size:32px;float:left;margin-right:11px}
-.mala-phrase strong{font:400 19px/1.15 "DM Serif Display"}
-.mala-phrase span{display:block;color:var(--muted);font-size:10px;margin-top:5px}
-.mala-progress{height:3px;background:#dedbd0;border-radius:99px;margin:15px 4px 0;overflow:hidden}
-.mala-progress i{display:block;height:100%;width:0;background:var(--red);border-radius:99px;transition:width .55s var(--ease)}
-.mala-markers{display:flex;justify-content:space-between;margin:7px 4px 0;color:#9a9d93;font-size:8px;letter-spacing:.06em}
-@media(max-width:380px){.mala-visual{height:390px}.mala-beads{top:48px}.mala-touch{bottom:15px}.mala-head h1{font-size:43px}}
-/* audio */
-.audio-panel{margin-top:15px;border:1px solid var(--line);background:#ffffffa8;border-radius:23px;padding:14px}.audio-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.audio-status{font-size:10px;color:var(--muted);font-weight:800}.audio-controls{display:flex;align-items:center;gap:7px;margin-top:10px}.audio-btn{width:40px;height:40px;border:1px solid var(--line);background:var(--paper);border-radius:50%;font-weight:900}.audio-btn.play{background:var(--green);color:white;border-color:var(--green)}.speed{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 11px;font-size:10px;font-weight:900;margin-left:auto}.audio-progress{height:4px;background:#dedbd0;border-radius:99px;margin-top:11px;overflow:hidden}.audio-progress span{display:block;height:100%;width:0;background:var(--red);transition:width .2s}
-/* bottom nav */
-.bottom-nav{position:fixed;z-index:40;left:0;right:0;bottom:0;height:calc(var(--nav) + env(safe-area-inset-bottom));padding:8px 12px env(safe-area-inset-bottom);background:#fffdf8e8;backdrop-filter:blur(22px);border-top:1px solid #dedbd080;display:flex;justify-content:center;gap:2px}.nav-item{border:0;background:none;flex:1;max-width:100px;color:#85897f;font-size:9px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-radius:16px}.nav-item span:first-child{font-size:20px;line-height:1}.nav-item.active{color:var(--green);background:#e8eddaaa}.nav-item:active{transform:none}
-/* overlay settings */
-.sheet-back{position:fixed;inset:0;background:#10150d66;z-index:60;opacity:0;pointer-events:none;transition:.3s}.sheet-back.show{opacity:1;pointer-events:auto}.sheet{position:fixed;z-index:61;left:0;right:0;bottom:0;background:var(--paper);border-radius:30px 30px 0 0;padding:22px 20px calc(25px + env(safe-area-inset-bottom));transform:translateY(100%);transition:.4s var(--ease)}.sheet.show{transform:none}.sheet h3{font:400 30px "DM Serif Display";margin:0 0 18px}.sheet button{width:100%;border:1px solid var(--line);background:white;border-radius:17px;padding:14px;text-align:left;margin-top:7px;font-weight:700}.toast{position:fixed;z-index:100;left:50%;bottom:calc(var(--nav) + 17px);transform:translate(-50%,20px);background:var(--green);color:white;padding:11px 15px;border-radius:999px;font-size:11px;font-weight:700;opacity:0;pointer-events:none;transition:.3s}.toast.show{opacity:1;transform:translate(-50%,0)}
-@media(min-width:800px){body{padding-bottom:0}.bottom-nav{left:50%;right:auto;bottom:20px;width:430px;border:1px solid var(--line);border-radius:24px;height:65px;padding:7px;background:#fffdf8e8}.screen{min-height:100vh}.home-hero{padding-top:60px}.day-list{grid-template-columns:1fr 1fr}.home-row{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:380px){.wrap,.app-header,.reader-head{width:calc(100% - 28px)}.home-title{font-size:53px}.today-card{padding:23px}.reader-content{width:calc(100% - 30px)}}
-</style></head><body>
-<header class="app-header"><button class="brand" onclick="go('home')" style="border:0;background:none;padding:0"><span class="mark">M</span><span>momento</span></button><div style="display:flex;align-items:center;gap:12px"><span id="headerDate" style="font-size:9px;letter-spacing:.13em;color:#777a72;text-transform:uppercase">28 · SET · 2026</span><button class="head-btn" onclick="openSheet()">☰</button></div></header>
-<main>
-<section id="home" class="screen active"><div class="wrap"><div class="home-hero"><div class="eyebrow" id="homeDate">SEU MOMENTO DE HOJE</div><h1 class="home-title">pare.<br><span class="serif">respire.</span><br>prospere.</h1><p class="home-copy">Um pequeno espaço do seu dia para voltar para Deus, ouvir a Palavra e lembrar do caminho que você está construindo.</p>
-<div class="today-card" id="todayCard"></div><div class="dev-carousel"><div class="carousel-track" id="homeCarousel"></div><div class="carousel-dots" id="carouselDots"></div></div><div class="home-row"><button class="small-card" onclick="go('progress')"><div class="eyebrow">PROGRESSO</div><div class="big" id="homeProgress">0%</div><p>dos devocionais concluídos</p></button><button class="small-card" onclick="go('favorites')"><div class="eyebrow">GUARDADOS</div><div class="big" id="homeFavs">0</div><p>devocionais favoritos</p></button></div>
-<button class="mantra-card" onclick="go('week')" style="width:100%;border:0;text-align:left"><span class="asterisk">*</span><span><strong>Eu estou no caminho da prosperidade.<br>Eu sou a prosperidade. Eu sou.</strong><span>frase para esta semana · Salmo 18</span></span></button>
-</div></div></section>
-<section id="devotionals" class="screen"><div class="wrap"><div class="screen-title"><div class="eyebrow">CAMINHO</div><h1>Devocionais</h1><p>Escolha um dia e entre no seu momento com Deus.</p></div><input id="search" class="search" placeholder="Buscar tema, palavra ou versículo…" oninput="renderList()"><div class="filters"><button class="filter on" id="allFilter" onclick="setFilter('all')">Todos</button><button class="filter" id="readFilter" onclick="setFilter('read')">Lidos</button><button class="filter" id="favFilter" onclick="setFilter('fav')">Favoritos</button><button class="filter" onclick="randomDevotional()">Surpreenda-me ✦</button></div><div id="dayList" class="day-list"></div></div></section>
-<section id="week" class="screen"><div class="wrap"><div class="screen-title"><div class="eyebrow">FOCO DA SEMANA</div><h1>Prosperidade<br>com Deus.</h1><p>Uma semana para meditar no Salmo 18 e alinhar fé, coragem, trabalho e confiança.</p></div><div class="today-card"><div class="mini">MANTRA</div><h2>Eu estou no caminho da prosperidade.</h2><div class="today-verse">Eu sou a prosperidade. Eu sou.</div></div><div style="padding:25px 0 60px"><div class="label">COMO USAR</div><p style="font:19px/1.7 'DM Serif Display';margin:0">Leia o Salmo 18 todos os dias. Depois, repita a frase devagar. Não como uma cobrança para que alguma coisa aconteça, mas como uma lembrança de que você pode caminhar com Deus em direção àquilo que está construindo.</p><div class="label">PERGUNTA DA SEMANA</div><div class="takeaway">Onde eu já consigo enxergar a prosperidade de Deus acontecendo na minha vida?</div><button class="primary" onclick="openReflection()">Escrever minha reflexão</button></div></div></section>
-<section id="favorites" class="screen"><div class="wrap"><div class="screen-title"><div class="eyebrow">SEUS GUARDADOS</div><h1>Favoritos</h1><p>Palavras que você decidiu carregar com você.</p></div><div id="favList" class="day-list"></div></div></section>
-<section id="progress" class="screen"><div class="wrap"><div class="screen-title"><div class="eyebrow">SEU CAMINHO</div><h1>Progresso</h1><p>Não é sobre fazer perfeito. É sobre continuar voltando.</p></div><div class="stats-big"><div class="stat-box"><strong id="statRead">0</strong><span>dias lidos</span></div><div class="stat-box"><strong id="statFav">0</strong><span>favoritos</span></div></div><div class="stat-box" style="margin-top:12px"><div class="eyebrow">SETEMBRO</div><div class="progress-track"><i id="progressBar"></i></div><b id="progressText">0 de 30</b><p style="color:var(--muted);font-size:11px;margin-top:7px">Cada dia concluído é uma pequena volta para o centro.</p></div><div style="padding:30px 0 60px"><button class="filter" onclick="openSheet();" style="width:100%;padding:14px">Opções e dados</button></div></div></section>
-<section id="mala" class="screen mala-screen"><div class="mala-wrap"><div class="mala-head"><div><button class="mala-back" onclick="go('home')">‹ Voltar</button><h1>Japamala</h1><p>108 contas. Um toque de cada vez. Respire, repita e permaneça.</p></div><button class="mala-reset" onclick="resetMala()" aria-label="Recomeçar">↻</button></div><div class="mala-card"><div class="eyebrow">CONTAS PERCORRIDAS</div><div class="mala-count" id="malaCount">0 <span>/ 108</span></div><div class="mala-hint" id="malaHint">Toque na conta vermelha para começar.</div><div class="mala-visual" id="malaStage"><div class="mala-thread"></div><div class="mala-orbit"><div class="mala-beads" id="malaBeads"></div></div><div class="mala-meru">*</div><div class="mala-touch" id="malaTouch">PRÓXIMA CONTA · <b>1</b></div></div><button class="mala-cta" onclick="tapMala()" id="malaTap">Tocar na conta · 1</button><div class="mala-progress"><i id="malaProgress"></i></div><div class="mala-markers"><span>1</span><span>27</span><span>54</span><span>81</span><span>108</span></div><div class="mala-actions"><button onclick="undoMala()">‹ Desfazer</button><button onclick="resetMala()">Recomeçar</button></div></div><div class="mala-phrase"><span class="asterisk">*</span><strong>Eu estou no caminho da prosperidade.<br>Eu sou a prosperidade. Eu sou.</strong><span>mantra da semana · Salmo 18</span></div></div></section><section id="reflection" class="screen"><div class="wrap" style="padding-top:18px"><button class="back" onclick="go('home')">‹ Voltar</button></div><div class="wrap reflect"><div class="screen-title"><div class="eyebrow">REFLEXÃO</div><h1>O que Deus<br>está fazendo?</h1><p>Escreva sem se preocupar em escrever bonito. Só seja honesto.</p></div><div class="question">Onde eu já consigo enxergar a prosperidade de Deus acontecendo na minha vida?</div><textarea id="reflectionText" class="textarea" placeholder="Escreva aqui…"></textarea><button class="save" onclick="saveReflection()">Salvar reflexão</button><div id="savedNote" class="saved-note"></div></div></section>
-<section id="reader" class="screen reader-screen"><div class="reader-head"><button class="back" onclick="closeReader()">‹ Voltar</button><div class="reader-tools"><button class="circle" onclick="toggleFavorite()" id="readerFav">♡</button><button class="circle" onclick="shareCurrent()">↗</button></div></div><article class="reader-content" id="readerContent"></article></section>
-</main>
-<nav class="bottom-nav"><button class="nav-item active" data-screen="home" onclick="go('home')"><span>⌂</span><span>Hoje</span></button><button class="nav-item" data-screen="devotionals" onclick="go('devotionals')"><span>✦</span><span>Devocionais</span></button><button class="nav-item" data-screen="mala" onclick="go('mala')"><span>◦</span><span>Japamala</span></button><button class="nav-item" data-screen="favorites" onclick="go('favorites')"><span>♡</span><span>Guardados</span></button><button class="nav-item" data-screen="progress" onclick="go('progress')"><span>◔</span><span>Progresso</span></button></nav>
-<div id="sheetBack" class="sheet-back" onclick="closeSheet()"></div><div id="sheet" class="sheet"><h3>Mais</h3><button onclick="openReflection();closeSheet()">✎ Minha reflexão</button><button onclick="go('week');closeSheet()">* Foco da semana</button><button onclick="resetProgress()">↺ Recomeçar progresso</button><button onclick="closeSheet()">Fechar</button></div><div id="toast" class="toast"></div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="rob.">
+<meta name="theme-color" content="#F2F2F0">
+<title>rob.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <script>
-const DATA={
-1:["Comece de novo","As misericórdias do Senhor são a causa de não sermos consumidos.","Lamentações 3:22-23","Um novo dia não precisa carregar o peso do dia anterior. Deus nos dá espaço para recomeçar, aprender e continuar. A graça não exige que você seja perfeito antes de seguir.","Hoje também pode ser um começo.","Deus, obrigado por uma nova oportunidade. Ajuda-me a deixar para trás o que precisa ficar e a caminhar com leveza para aquilo que Tu tens preparado. Amém."],
-2:["Confie mesmo sem entender","Confia no Senhor de todo o teu coração e não te estribes no teu próprio entendimento.","Provérbios 3:5","Há coisas que só fazem sentido depois. A fé muitas vezes começa exatamente onde termina a nossa necessidade de entender tudo.","Eu posso confiar sem ter todas as respostas.","Senhor, acalma minha necessidade de controlar cada detalhe. Ensina-me a confiar em Ti mesmo quando o caminho ainda não estiver claro. Amém."],
-3:["Tenha coragem","Sê forte e corajoso; não temas, nem te espantes, porque o Senhor, teu Deus, é contigo.","Josué 1:9","Coragem não significa ausência de medo. Significa decidir não deixar o medo escolher por você. Deus não prometeu que todos os caminhos seriam fáceis, mas prometeu presença.","Eu não estou sozinho no caminho.","Deus, coloca coragem dentro de mim. Que o medo não seja maior do que a certeza de que Tu estás comigo. Amém."],
-4:["Existe um tempo para tudo","Tudo tem o seu tempo determinado, e há tempo para todo propósito debaixo do céu.","Eclesiastes 3:1","Nem tudo precisa acontecer agora. Algumas respostas precisam amadurecer, algumas portas precisam se abrir no tempo certo e alguns processos precisam de paciência.","O tempo de Deus também faz parte da promessa.","Senhor, dá-me paciência para respeitar os processos e sabedoria para reconhecer o que já posso fazer hoje. Amém."],
-5:["Agradeça pelo que já existe","Em tudo, dai graças, porque esta é a vontade de Deus.","1 Tessalonicenses 5:18","A gratidão não ignora aquilo que falta. Ela muda o lugar de onde olhamos para aquilo que já recebemos. Hoje, perceba uma pequena coisa boa que normalmente passaria despercebida.","Ainda existem motivos para agradecer.","Deus, abre meus olhos para as pequenas bênçãos de hoje. Que eu não fique tão preocupado com o que falta a ponto de esquecer tudo aquilo que já recebi. Amém."],
-6:["Seu propósito não desapareceu","Porque eu bem sei os pensamentos que penso a vosso respeito, diz o Senhor.","Jeremias 29:11","Às vezes, uma mudança de rota parece o fim de um plano. Mas uma porta fechada não significa que Deus tenha esquecido aquilo que colocou em seu coração.","Uma mudança de caminho não apaga o propósito.","Senhor, ajuda-me a confiar nos caminhos que ainda não consigo compreender. Guia meus passos e conserva vivo em mim aquilo que vem de Ti. Amém."],
-7:["Descanse","Vinde a mim, todos os que estais cansados e sobrecarregados, e eu vos aliviarei.","Mateus 11:28","Você não precisa resolver tudo hoje. Existe uma diferença entre responsabilidade e carregar sozinho aquilo que deveria ser entregue a Deus.","Nem tudo precisa ser resolvido hoje.","Jesus, recebe aquilo que está pesado dentro de mim. Ensina-me a descansar sem culpa e a confiar que Tu continuas trabalhando. Amém."],
-8:["A fé também mora nos detalhes","Quem é fiel no pouco também é fiel no muito.","Lucas 16:10","Grandes mudanças quase sempre começam pequenas. Uma decisão, uma oração, um hábito, um passo. Não despreze aquilo que parece pequeno hoje.","O pequeno passo de hoje também importa.","Deus, dá-me constância para cuidar bem das pequenas coisas. Que eu não despreze os começos simples. Amém."],
-9:["Deus provê","O meu Deus, segundo as suas riquezas, suprirá todas as vossas necessidades.","Filipenses 4:19","A preocupação com o amanhã pode ocupar tanto espaço que esquecemos de perceber como Deus já sustentou o hoje. Provisão nem sempre chega do jeito que imaginamos, mas Deus continua sendo fonte.","Eu posso caminhar sem viver em escassez de esperança.","Senhor, cuida das minhas necessidades e do meu coração. Dá-me sabedoria para fazer a minha parte e fé para confiar na Tua provisão. Amém."],
-10:["Permita-se parar","Aquietai-vos e sabei que eu sou Deus.","Salmos 46:10","Há momentos em que a resposta não é fazer mais. É silenciar. Parar de procurar uma solução por alguns minutos e simplesmente lembrar quem está no controle.","Às vezes, fé é aquietar.","Deus, silencia o barulho dentro de mim. Ajuda-me a lembrar que eu não preciso controlar tudo para estar seguro. Amém."],
-11:["A esperança continua","Por que estás abatida, ó minha alma? Espera em Deus.","Salmos 42:11","Sentir-se cansado não significa ter perdido a fé. Há dias em que a esperança precisa ser lembrada, não sentida. Continue voltando para Deus.","Eu posso esperar novamente.","Senhor, renova minha esperança. Quando meu coração estiver cansado, lembra-me das vezes em que Tu já me sustentaste. Amém."],
-12:["Entregue","Lança o teu cuidado sobre o Senhor, e ele te susterá.","Salmos 55:22","Entregar não é desistir. É reconhecer que existe um limite para aquilo que as nossas mãos conseguem carregar. Coloque diante de Deus aquilo que você vem tentando resolver sozinho.","O que eu entrego a Deus não precisa continuar nas minhas mãos.","Pai, eu entrego a Ti aquilo que não consigo controlar. Sustenta-me e ensina-me a confiar. Amém."],
-13:["Deus está presente","Ainda que eu ande pelo vale da sombra da morte, não temerei mal algum, porque tu estás comigo.","Salmos 23:4","A presença de Deus não depende de um cenário perfeito. Ela também está no vale, no caminho difícil e no dia comum.","A presença de Deus não depende das circunstâncias.","Senhor, obrigado porque não preciso atravessar nenhum vale sozinho. Fica comigo hoje e guia meus passos. Amém."],
-14:["Você é cuidado","Lança sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós.","1 Pedro 5:7","Existe algo profundamente consolador em lembrar que você é cuidado. Não precisa esconder de Deus o que sente. Fale com Ele com honestidade.","Eu sou cuidado por Deus.","Deus, recebe minhas preocupações. Que eu consiga descansar sabendo que minha vida não está esquecida diante de Ti. Amém."],
-15:["Um novo ciclo","Eis que faço uma coisa nova; agora sairá à luz; porventura não a percebeis?","Isaías 43:19","Alguns ciclos terminam antes de sabermos exatamente o que virá depois. Não tenha medo do espaço entre o fim e o começo. Deus também trabalha nele.","O fim de um ciclo pode ser o começo de outro.","Senhor, prepara meu coração para o novo. Dá-me coragem para deixar ir e fé para receber aquilo que está chegando. Amém."],
-16:["Peça direção","Reconhece-o em todos os teus caminhos, e ele endireitará as tuas veredas.","Provérbios 3:6","Antes de pedir que Deus abençoe uma decisão, peça que Ele conduza a decisão. Direção é também aprender a escutar.","Eu não preciso caminhar sem direção.","Deus, guia minhas escolhas. Fecha as portas que não são para mim e dá-me clareza para reconhecer os caminhos que vêm de Ti. Amém."],
-17:["Deus está cuidando do caminho","Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus.","Isaías 41:10","Nem sempre você vai saber exatamente o que vem depois. Às vezes, Deus não mostra o caminho inteiro. Ele mostra apenas o próximo passo. E talvez seja justamente aí que mora a fé: continuar caminhando mesmo quando você ainda não consegue enxergar tudo.","Você não precisa enxergar todo o caminho para dar o próximo passo com Deus.","Deus, acalma meu coração quando eu tentar controlar aquilo que ainda não consigo ver. Dá-me coragem para seguir, sabedoria para escolher e confiança para lembrar que eu não estou caminhando sozinho. Cuida dos meus passos e me ensina a confiar em Ti. Amém."],
-18:["Você não precisa ter todas as respostas","Confia no Senhor de todo o teu coração e não te estribes no teu próprio entendimento.","Provérbios 3:5","Nem toda resposta precisa chegar antes do próximo passo. Há momentos em que confiar em Deus significa aceitar que algumas coisas ainda estão sendo construídas.","A falta de respostas não significa falta de direção.","Senhor, quando eu não entender o que está acontecendo, ajuda-me a confiar em Ti. Dá-me paz para esperar e coragem para continuar. Amém."],
-19:["O que Deus está construindo em silêncio","Tudo tem o seu tempo determinado, e há tempo para todo propósito debaixo do céu.","Eclesiastes 3:1","Nem tudo que parece parado está realmente parado. Existem processos que acontecem longe dos nossos olhos. Deus também trabalha nos intervalos, nos silêncios e nos dias comuns.","Silêncio não é ausência. Às vezes, é processo.","Deus, ajuda-me a não desprezar os períodos silenciosos. Que eu consiga confiar no que Tu estás fazendo mesmo quando ainda não consigo perceber. Amém."],
-20:["Não abandone a esperança","Aqueles que semeiam com lágrimas, com alegria colherão.","Salmos 126:5","Existem sementes que precisam de tempo antes de aparecerem. O esforço de hoje pode estar preparando uma colheita que você ainda não consegue ver.","Continue semeando aquilo que vale a pena.","Senhor, fortalece-me para continuar. Que eu não desista só porque ainda não vejo os frutos. Amém."],
-21:["Deus renova suas forças","Os que esperam no Senhor renovarão as suas forças.","Isaías 40:31","Cansaço não precisa ser o ponto final. Há uma força que não vem apenas da nossa capacidade de insistir, mas da capacidade de descansar em Deus e receber novo fôlego.","Eu posso recomeçar com novas forças.","Deus, renova minhas forças. Onde eu estiver cansado, sopra novo ânimo e lembra-me que ainda existe caminho pela frente. Amém."],
-22:["Tenha paciência com você","Aquele que começou boa obra em vós há de completá-la.","Filipenses 1:6","Você está em processo. Não cobre de uma versão ainda em construção a perfeição de quem já chegou ao destino.","Deus ainda está trabalhando em mim.","Senhor, ajuda-me a ter paciência com meu próprio processo. Que eu consiga enxergar crescimento onde antes só enxergava distância. Amém."],
-23:["O amor permanece","O amor jamais acaba.","1 Coríntios 13:8","Em um mundo cheio de coisas passageiras, o amor de Deus permanece. Quando outras certezas mudarem, volte para aquilo que não muda.","O amor de Deus permanece.","Pai, ajuda-me a viver a partir da certeza do Teu amor, e não da necessidade de provar meu valor. Amém."],
-24:["Quem você é em Deus","Vede que grande amor nos tem concedido o Pai: sermos chamados filhos de Deus.","1 João 3:1","Seu valor não começa no que você conquista. Antes de qualquer título, resultado ou reconhecimento, existe uma identidade recebida: você é amado por Deus.","Meu valor não depende do meu desempenho.","Deus, ajuda-me a lembrar quem eu sou em Ti. Que nenhuma comparação seja maior do que a Tua voz sobre minha vida. Amém."],
-25:["Peça sabedoria","Se algum de vós tem falta de sabedoria, peça-a a Deus.","Tiago 1:5","Nem toda decisão precisa ser tomada no impulso. Você pode parar, orar, pensar e pedir sabedoria. Deus não se incomoda com quem pede direção.","Antes de agir, eu posso pedir sabedoria.","Senhor, dá-me sabedoria para as decisões de hoje. Que eu não seja guiado apenas pela pressa, pelo medo ou pela ansiedade. Amém."],
-26:["Olhe para o que Deus já fez","Bendize, ó minha alma, ao Senhor, e não te esqueças de nenhum de seus benefícios.","Salmos 103:2","Quando o futuro assusta, lembrar do passado pode fortalecer a fé. Relembre os livramentos, as portas abertas e os momentos em que você pensou que não conseguiria.","Eu não devo esquecer tudo o que Deus já fez.","Deus, obrigado por cada vez que Tu me sustentaste. Quando eu duvidar do amanhã, lembra-me da Tua fidelidade ontem. Amém."],
-27:["Fique perto","Chegai-vos a Deus, e ele se chegará a vós.","Tiago 4:8","Não transforme a oração em último recurso. Deus não precisa de uma versão perfeita de você. Aproxime-se como está.","Posso chegar a Deus exatamente como estou.","Senhor, quero estar mais perto de Ti. Recebe meu coração como ele está e ensina-me a cultivar essa presença todos os dias. Amém."],
-28:["Descanse no que você não controla","Entrega o teu caminho ao Senhor; confia nele, e ele tudo fará.","Salmos 37:5","Existe paz quando entendemos que responsabilidade não significa controle absoluto. Faça o que está ao seu alcance e entregue a Deus o que não está.","Eu faço minha parte e entrego o restante.","Deus, mostra-me o que depende de mim e ajuda-me a entregar aquilo que não depende. Que eu encontre paz nessa diferença. Amém."],
-29:["Amanhã ainda não chegou","Não vos inquieteis, pois, pelo dia de amanhã.","Mateus 6:34","A ansiedade tenta fazer você viver vários dias ao mesmo tempo. Mas hoje já tem suas próprias tarefas, alegrias e necessidades. Volte para o presente.","Hoje é o dia que Deus colocou nas minhas mãos.","Jesus, traz minha mente de volta para o hoje. Ajuda-me a não sofrer antecipadamente por aquilo que ainda não aconteceu. Amém."],
-30:["Entregue o mês","Em paz me deito e logo pego no sono, porque, Senhor, só tu me fazes repousar seguro.","Salmos 4:8","Um mês termina. Algumas coisas deram certo, outras não. Algumas orações foram respondidas, outras continuam abertas. Entregue tudo a Deus e reconheça que você chegou até aqui.","Eu termino este mês confiando em Deus.","Senhor, obrigado por me trazer até aqui. Recebe minhas vitórias, minhas frustrações, meus pedidos e meus aprendizados. Que o próximo ciclo encontre meu coração mais perto de Ti. Amém."]};
-
-const KEY='um_momento_deus_v4';let state=JSON.parse(localStorage.getItem(KEY)||'null')||{read:[],fav:[],notes:{},reflection:''};let currentDay=17;let filter='all';
-const save=()=>localStorage.setItem(KEY,JSON.stringify(state));
-function dataArray(){return Object.entries(DATA).map(([day,v])=>({day:+day,title:v[0],verse:v[1],ref:v[2],body:v[3],take:v[4],prayer:v[5]}));}
-function getDay(d){return DATA[d]?{day:+d,title:DATA[d][0],verse:DATA[d][1],ref:DATA[d][2],body:DATA[d][3],take:DATA[d][4],prayer:DATA[d][5]}:null}
-function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById(id);if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'instant'});}document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='devotionals')renderList();if(id==='favorites')renderFavs();if(id==='progress')renderProgress();if(id==='home')renderHome();if(id==='mala')renderMala();}
-function openReader(day){currentDay=day;renderReader();document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('reader').classList.add('active');window.scrollTo({top:0,behavior:'instant'});document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));}
-function closeReader(){stopAudio();go('devotionals')}
-function renderHome(){const d=getDay(currentDay)||getDay(17);document.getElementById('homeDate').textContent=`${d.day} DE SETEMBRO · SEU MOMENTO DE HOJE`;document.getElementById('todayCard').innerHTML=`<div class="mini">DEVOCIONAL DE HOJE · ${String(d.day).padStart(2,'0')}</div><h2>${d.title}</h2><div class="today-verse">${d.verse}<span class="today-ref">${d.ref}</span></div><button class="primary" onclick="openReader(${d.day})">Entrar no devocional →</button>`;const total=dataArray().length,read=state.read.length;document.getElementById('homeProgress').textContent=Math.round(read/total*100)+'%';document.getElementById('homeFavs').textContent=state.fav.length;renderHomeCarousel();}
-function renderHomeCarousel(){const el=document.getElementById('homeCarousel'),dots=document.getElementById('carouselDots');if(!el)return;const arr=dataArray().slice(Math.max(0,currentDay-2),Math.min(dataArray().length,currentDay+1));el.innerHTML=arr.map(d=>`<button class="carousel-card" onclick="openReader(${d.day})"><span class="mini">${String(d.day).padStart(2,'0')} · DEVOCIONAL</span><h3>${d.title}</h3><p>${d.verse}</p></button>`).join('');dots.innerHTML=arr.map((d,i)=>`<button class="carousel-dot ${i===0?'on':''}" onclick="document.getElementById('homeCarousel').children[${i}].scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'})"></button>`).join('');el.onscroll=()=>{const i=Math.round(el.scrollLeft/(el.children[0]?.offsetWidth+12||1));dots.querySelectorAll('.carousel-dot').forEach((x,j)=>x.classList.toggle('on',j===i))}}
-
-function renderList(){const q=(document.getElementById('search')?.value||'').toLowerCase();let arr=dataArray().filter(d=>{const hit=!q||[d.title,d.verse,d.ref,d.body].join(' ').toLowerCase().includes(q);const ok=filter==='all'||(filter==='read'&&state.read.includes(d.day))||(filter==='fav'&&state.fav.includes(d.day));return hit&&ok});document.getElementById('dayList').innerHTML=arr.length?arr.map(d=>`<button class="day-item" onclick="openReader(${d.day})"><span class="day-number">${String(d.day).padStart(2,'0')}</span><span class="day-info"><b>${d.title}</b><span>${d.ref} · ${state.read.includes(d.day)?'Lido':''}${state.fav.includes(d.day)?' · ♥':''}</span></span><span class="chev">›</span></button>`).join(''):`<div class="empty"><div class="star">*</div><p>Nenhum devocional encontrado.</p></div>`;}
-function setFilter(x){filter=x;document.querySelectorAll('.filter').forEach(b=>b.classList.remove('on'));const map={all:'allFilter',read:'readFilter',fav:'favFilter'};if(map[x])document.getElementById(map[x]).classList.add('on');renderList();}
-function randomDevotional(){const a=dataArray();openReader(a[Math.floor(Math.random()*a.length)].day)}
-function renderReader(){const d=getDay(currentDay);if(!d)return;document.getElementById('readerFav').textContent=state.fav.includes(d.day)?'♥':'♡';document.getElementById('readerFav').classList.toggle('liked',state.fav.includes(d.day));document.getElementById('readerContent').innerHTML=`<div class="reader-meta">${String(d.day).padStart(2,'0')} · DEVOCIONAL</div><h1 class="reader-title">${d.title}</h1><div class="big-verse">${d.verse}<small>${d.ref}</small></div><div class="label">A ESCRITURA</div><p>${d.verse}</p><div class="label">TRAZENDO PARA A SUA VIDA</div><p>${d.body}</p><div class="label">LEVE COM VOCÊ</div><div class="takeaway">${d.take}</div><div class="label">ORAÇÃO</div><p class="prayer">${d.prayer}</p><div class="reader-actions"><button class="action dark" onclick="markRead()">${state.read.includes(d.day)?'✓ Lido':'Marcar como lido'}</button><button class="action" onclick="openReflection()">✎ Refletir</button><button class="action" onclick="speak()">◉ Ouvir</button></div><div class="audio-panel"><div class="audio-top"><span class="audio-status" id="audioStatus">Áudio parado</span><button class="speed" onclick="changeSpeed()" id="speedBtn">0,88×</button></div><div class="audio-controls"><button class="audio-btn play" onclick="toggleAudio()" id="audioPlay">▶</button><button class="audio-btn" onclick="stopAudio()">■</button><button class="audio-btn" onclick="restartAudio()">↺</button></div><div class="audio-progress"><span id="audioProgress"></span></div></div><div class="reader-next">${d.day>1?`<button onclick="openReader(${d.day-1})"><small>Anterior</small><b>‹ ${DATA[d.day-1][0]}</b></button>`:'<span></span>'}${DATA[d.day+1]?`<button onclick="openReader(${d.day+1})"><small>Próximo</small><b>${DATA[d.day+1][0]} ›</b></button>`:''}</div>`;}
-function markRead(){if(!state.read.includes(currentDay))state.read.push(currentDay);save();renderReader();renderHome();toast('Devocional concluído ✦');confetti();}
-function toggleFavorite(){const i=state.fav.indexOf(currentDay);if(i>=0)state.fav.splice(i,1);else state.fav.push(currentDay);save();renderReader();renderHome();toast(i>=0?'Removido dos guardados':'Guardado nos favoritos ♥');}
-function renderFavs(){const el=document.getElementById('favList'),a=state.fav.map(getDay).filter(Boolean);el.innerHTML=a.length?a.map(d=>`<button class="day-item" onclick="openReader(${d.day})"><span class="day-number">♥</span><span class="day-info"><b>${d.title}</b><span>${d.ref}</span></span><span class="chev">›</span></button>`).join(''):`<div class="empty"><div class="star">*</div><p>Você ainda não guardou nenhum devocional.</p><button class="filter" onclick="go('devotionals')">Explorar devocionais</button></div>`;}
-function renderProgress(){const total=dataArray().length,r=state.read.length,p=Math.round(r/total*100);document.getElementById('statRead').textContent=r;document.getElementById('statFav').textContent=state.fav.length;document.getElementById('progressBar').style.width=p+'%';document.getElementById('progressText').textContent=`${r} de ${total}`;}
-function openReflection(){document.getElementById('reflectionText').value=state.reflection||'';document.getElementById('savedNote').textContent=state.reflection?'Última reflexão salva neste aparelho.':'';go('reflection');}
-function saveReflection(){state.reflection=document.getElementById('reflectionText').value;save();document.getElementById('savedNote').textContent='Salvo neste aparelho ✦';toast('Reflexão salva');}
-function openSheet(){document.getElementById('sheetBack').classList.add('show');document.getElementById('sheet').classList.add('show')}function closeSheet(){document.getElementById('sheetBack').classList.remove('show');document.getElementById('sheet').classList.remove('show')}
-function resetProgress(){if(confirm('Recomeçar seu progresso? Seus favoritos e reflexão também serão apagados.')){state={read:[],fav:[],notes:{},reflection:''};save();closeSheet();renderHome();toast('Começamos de novo.');}}
-function shareCurrent(){const d=getDay(currentDay),text=`${d.title}
-
-${d.verse}
-${d.ref}`;if(navigator.share)navigator.share({title:d.title,text});else navigator.clipboard?.writeText(text).then(()=>toast('Versículo copiado'))}
-let audioUtterance=null,audioText='',audioPlaying=false,audioRate=.88,audioTimer=null;
-function buildAudio(){const d=getDay(currentDay);return `${d.title}. ${d.verse}. ${d.body}. ${d.take}. ${d.prayer}`}
-function speak(){if(!('speechSynthesis'in window)){toast('Áudio não disponível neste navegador');return}audioText=buildAudio();speechSynthesis.cancel();audioUtterance=new SpeechSynthesisUtterance(audioText);audioUtterance.lang='pt-BR';audioUtterance.rate=audioRate;audioUtterance.onstart=()=>{audioPlaying=true;updateAudioUI('Reproduzindo');startAudioProgress()};audioUtterance.onend=()=>{audioPlaying=false;updateAudioUI('Áudio concluído');stopAudioProgress();document.getElementById('audioProgress').style.width='100%'};audioUtterance.onpause=()=>{audioPlaying=false;updateAudioUI('Pausado');stopAudioProgress()};audioUtterance.onresume=()=>{audioPlaying=true;updateAudioUI('Reproduzindo');startAudioProgress()};speechSynthesis.speak(audioUtterance)}
-function toggleAudio(){if(!('speechSynthesis'in window))return;if(speechSynthesis.speaking&&!speechSynthesis.paused){speechSynthesis.pause();return}if(speechSynthesis.paused){speechSynthesis.resume();return}speak()}
-function stopAudio(){speechSynthesis?.cancel();audioPlaying=false;stopAudioProgress();updateAudioUI('Áudio parado');const p=document.getElementById('audioProgress');if(p)p.style.width='0'}
-function restartAudio(){stopAudio();setTimeout(speak,80)}
-function changeSpeed(){audioRate=audioRate>=1.15?.72:audioRate+.13;audioRate=Math.round(audioRate*100)/100;document.getElementById('speedBtn').textContent=audioRate.toFixed(2).replace('.',',')+'×';if(speechSynthesis.speaking){restartAudio()}}
-function updateAudioUI(status){const s=document.getElementById('audioStatus'),b=document.getElementById('audioPlay');if(s)s.textContent=status;if(b)b.textContent=audioPlaying?'Ⅱ':'▶'}
-function startAudioProgress(){stopAudioProgress();const p=document.getElementById('audioProgress');if(!p)return;let w=0;audioTimer=setInterval(()=>{w=Math.min(96,w+.12);p.style.width=w+'%'},120)}
-function stopAudioProgress(){if(audioTimer)clearInterval(audioTimer);audioTimer=null}
-
-let malaCount=Number(localStorage.getItem('mala_108')||0);
-function renderMala(){
- const stage=document.getElementById('malaStage'), beads=document.getElementById('malaBeads'); if(!stage||!beads)return;
- beads.innerHTML='';
- const visible=13, spacing=39, center=6;
- for(let i=1;i<=108;i++){
-   const b=document.createElement('button');
-   const offset=i-(malaCount+center);
-   b.className='mala-bead '+(i<=malaCount?'done past':'future')+(i===malaCount+1?' current':'');
-   b.style.top=(center*spacing+offset*spacing)+'px';
-   if(i<=malaCount-13) b.style.opacity='0';
-   if(i>malaCount+7) b.style.opacity='.15';
-   b.setAttribute('aria-label',`Conta ${i} de 108`);
-   b.onclick=()=>{if(i===malaCount+1)tapMala()};
-   beads.appendChild(b);
- }
- const count=document.getElementById('malaCount');
- if(count)count.innerHTML=`${malaCount} <span>/ 108</span>`;
- const hint=document.getElementById('malaHint');
- if(hint)hint.textContent=malaCount===108?'108 contas completas. Que a sua intenção permaneça.':malaCount?`Conta ${malaCount} concluída. Continue no seu ritmo.`:'Toque na conta vermelha para começar.';
- const cta=document.getElementById('malaTap');
- if(cta){cta.textContent=malaCount===108?'✦ Japamala completa':`Tocar na conta · ${malaCount+1}`;cta.classList.toggle('done',malaCount===108)}
- const touch=document.getElementById('malaTouch');
- if(touch)touch.innerHTML=malaCount===108?'✦ <b>108 CONTAS COMPLETAS</b>':'PRÓXIMA CONTA · <b>'+(malaCount+1)+'</b>';
- const prog=document.getElementById('malaProgress'); if(prog)prog.style.width=(malaCount/108*100)+'%';
+(function(){var c=document.createElement('canvas');c.width=512;c.height=512;var x=c.getContext('2d');
+  x.fillStyle='#F2F2F0';x.fillRect(0,0,512,512);x.fillStyle='#111111';x.textAlign='center';x.textBaseline='middle';
+  x.font='700 170px -apple-system, "Helvetica Neue", Arial, sans-serif';x.fillText('rob',236,262);
+  x.beginPath();x.arc(398,318,26,0,Math.PI*2);x.fillStyle='#E03526';x.fill();
+  var l=document.createElement('link');l.rel='apple-touch-icon';l.href=c.toDataURL('image/png');document.head.appendChild(l);})();
+</script>
+<style>
+:root{
+  --bg:#F2F2F0; --card:#FFFFFF; --ink:#111111; --ink2:#6B6B68; --ink3:#A9A9A5; --line:#E6E6E2; --red:#E03526;
+  --sans:'Geist','Helvetica Neue',Arial,sans-serif; --serif:'Instrument Serif',Georgia,serif;
+  --r:20px; --g:24px;
+  --ease:cubic-bezier(.2,.8,.2,1); --spring:cubic-bezier(.2,.9,.3,1.12);
 }
-function tapMala(){
- if(malaCount>=108){toast('Você completou as 108 contas ✦');return}
- malaCount++;localStorage.setItem('mala_108',malaCount);renderMala();
- const beads=document.querySelectorAll('.mala-bead'); const current=beads[malaCount-1];
- if(current){current.animate([{transform:'translate(-50%,0) scale(1)'},{transform:'translate(-50%,0) scale(.78)'},{transform:'translate(-50%,0) scale(1)'}],{duration:380,easing:'ease-out'})}
- if(malaCount===108){confetti();toast('108 contas completas ✦')}else if(navigator.vibrate)navigator.vibrate(8)
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;display:flex;justify-content:center;min-height:100vh}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+input[type=number]{-moz-appearance:textfield}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.app{width:100%;max-width:440px;min-height:100vh;padding:0 var(--g) 128px}
+
+.lb{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.t56{font-size:56px;font-weight:600;letter-spacing:-.045em;line-height:.95}
+.t28{font-size:28px;font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.t17{font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.2}
+em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+.muted{color:var(--ink2)}
+.num{font-variant-numeric:tabular-nums}
+
+.s8{margin-top:8px}.s16{margin-top:16px}.s24{margin-top:24px}.s48{margin-top:48px}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
+
+.view{display:none}
+.view.on{display:block;animation:in .45s var(--ease) both}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.top{display:flex;justify-content:space-between;align-items:center;height:64px;padding-top:env(safe-area-inset-top);box-sizing:content-box}
+.logo{font-size:22px;font-weight:700;letter-spacing:-.04em}
+.logo i{font-style:normal;color:var(--red)}
+.av{width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-size:14px;font-weight:600;text-align:center}
+
+.card{background:var(--card);border-radius:var(--r)}
+.btn{display:flex;align-items:center;justify-content:space-between;width:100%;height:56px;padding:0 20px;border-radius:16px;background:var(--red);color:#fff;font-size:17px;font-weight:600;letter-spacing:-.01em;transition:transform .25s var(--spring),opacity .2s}
+.btn:active{transform:scale(.98)}
+.btn.dark{background:var(--ink)}
+.btn.soft{background:var(--card);color:var(--ink)}
+.btn svg{width:20px;height:20px}
+.link{font-size:15px;font-weight:500;color:var(--red)}
+.bar{height:3px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--red);border-radius:3px;transition:width .9s var(--ease)}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;padding:4px;border-radius:14px;background:var(--card);gap:4px}
+.seg button{height:40px;border-radius:10px;font-size:15px;font-weight:500;color:var(--ink2);text-align:center;transition:background .25s,color .25s}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.rows{background:var(--card);border-radius:var(--r);overflow:hidden}
+.row{display:flex;align-items:center;gap:16px;width:100%;min-height:64px;padding:12px 16px;position:relative}
+.row+.row::before{content:"";position:absolute;top:0;left:16px;right:0;height:1px;background:var(--line)}
+.row .m{flex:1;min-width:0}
+.row .sub{font-size:15px;color:var(--ink2);margin-top:2px}
+.chev{width:16px;height:16px;color:var(--ink3);flex:none}
+.tog{width:48px;height:28px;border-radius:99px;background:var(--line);position:relative;flex:none;transition:background .25s}
+.tog::after{content:"";position:absolute;left:2px;top:2px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .3s var(--spring)}
+.tog.on{background:var(--ink)}
+.tog.on::after{transform:translateX(20px)}
+
+.hero{padding-top:24px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
+.wd{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--ink3)}
+.wd i{width:8px;height:8px;border-radius:50%;background:var(--line);transition:background .3s,transform .4s var(--spring)}
+.wd.done i{background:var(--ink);transform:scale(1.25)}
+.wd.today{color:var(--ink)}
+.wd.today i{box-shadow:0 0 0 3px var(--bg),0 0 0 4.5px var(--red)}
+.tip{font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.3;color:var(--ink2);margin-top:16px;animation:in .4s var(--ease) both}
+
+.ring{width:36px;height:36px;flex:none;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:3}
+.ring .b{stroke:var(--line)}
+.ring .p{stroke:var(--red);stroke-linecap:round;transition:stroke-dashoffset .9s var(--ease)}
+.done-t{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+
+.wt-top{display:flex;justify-content:space-between;align-items:center;height:64px;padding-top:env(safe-area-inset-top);box-sizing:content-box}
+.x{width:36px;height:36px;border-radius:50%;background:var(--card);display:grid;place-items:center}
+.x svg{width:16px;height:16px}
+.clock{font-size:15px;font-weight:500;color:var(--ink2)}
+.ex{display:block;width:100%;padding:16px;position:relative}
+.ex+.ex::before{content:"";position:absolute;top:0;left:16px;right:0;height:1px;background:var(--line)}
+.ex-h{display:flex;gap:16px;align-items:flex-start;width:100%}
+.ex-h .n{width:20px;font-size:15px;color:var(--ink3);padding-top:1px;flex:none}
+.ex-h .m{flex:1;min-width:0}
+.ex.done .t17{color:var(--ink3)}
+.dots{display:flex;gap:8px;margin:12px 0 0 36px;flex-wrap:wrap}
+.dot{width:36px;height:36px;border-radius:50%;background:var(--bg);font-size:15px;font-weight:500;color:var(--ink2);display:grid;place-items:center;text-align:center;transition:background .2s,color .2s,transform .3s var(--spring)}
+.dot:active{transform:scale(.88)}
+.dot.on{background:var(--ink);color:var(--bg)}
+.dot.cardio{width:auto;padding:0 16px;border-radius:99px}
+.det{display:none;margin:16px 0 0 36px}
+.ex.open .det{display:block;animation:in .35s var(--ease) both}
+.det p.tipx{font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.35;color:var(--ink2)}
+.load{display:flex;align-items:center;gap:8px;margin-top:16px}
+.load button{width:40px;height:40px;border-radius:12px;background:var(--bg);font-size:20px;text-align:center;transition:transform .25s var(--spring)}
+.load button:active{transform:scale(.9)}
+.load input{width:72px;height:40px;border:0;border-radius:12px;background:var(--bg);text-align:center;font:600 17px var(--sans);color:var(--ink);outline:none}
+.load span{font-size:15px;color:var(--ink2)}
+.info{font-size:15px;color:var(--ink2);margin-top:8px}
+.info b{color:var(--ink);font-weight:600}
+.info .link{margin-left:4px}
+.alts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.alts button{height:32px;padding:0 12px;border-radius:99px;background:var(--bg);font-size:13px;font-weight:500}
+.alts button.on{background:var(--ink);color:var(--bg)}
+
+.rest{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom));z-index:50;width:min(392px,calc(100% - 48px));height:56px;border-radius:16px;background:var(--ink);color:var(--bg);display:flex;align-items:center;gap:16px;padding:0 8px 0 20px;transform:translate(-50%,140%);transition:transform .45s var(--spring)}
+.rest.on{transform:translate(-50%,0)}
+.rest .t{flex:1;font-size:17px;font-weight:600}
+.rest .t span{font-weight:400;color:var(--ink3);margin-left:8px}
+.rest button{height:40px;padding:0 14px;border-radius:12px;font-size:15px;font-weight:500;background:rgba(255,255,255,.1);text-align:center}
+.rest .fill{position:absolute;left:0;bottom:0;height:2px;background:var(--red);border-radius:2px;width:0}
+
+.fin{position:fixed;inset:0;z-index:100;background:var(--red);color:#fff;display:none;flex-direction:column;justify-content:flex-end;padding:48px 24px max(48px,env(safe-area-inset-bottom));cursor:pointer}
+.fin.on{display:flex;animation:up .6s var(--ease) both}
+@keyframes up{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0)}}
+.fin .t56{font-size:72px}
+.fin .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.fin .stats b{display:block;font-size:28px;font-weight:600;letter-spacing:-.03em}
+.fin .stats span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+
+.stats3{display:grid;grid-template-columns:repeat(3,1fr)}
+.stats3 div{padding:16px;position:relative}
+.stats3 div+div::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:1px;background:var(--line)}
+.stats3 b{display:block;font-size:28px;font-weight:600;letter-spacing:-.03em;line-height:1}
+.stats3 span{display:block;font-size:13px;color:var(--ink2);margin-top:8px;line-height:1.25}
+.inp{display:flex;gap:8px}
+.inp input{flex:1;min-width:0;height:48px;border:0;border-radius:14px;background:var(--card);padding:0 16px;font:500 17px var(--sans);color:var(--ink);outline:none}
+.inp input::placeholder{color:var(--ink3)}
+.inp .btn{width:auto;height:48px;padding:0 20px;border-radius:14px;font-size:15px}
+.spark{width:100%;height:48px;display:block;margin-top:16px}
+.out{margin-top:16px;animation:in .35s var(--ease) both}
+textarea{width:100%;height:96px;border:0;border-radius:14px;background:var(--card);padding:12px 16px;font:13px/1.4 ui-monospace,Menlo,monospace;color:var(--ink);resize:none;outline:none}
+
+/* ajustar dias */
+.edw{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.edw button{height:56px;border-radius:12px;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:12px;font-weight:500;color:var(--ink2);text-align:center}
+.edw button i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.edw button.done i{background:var(--ink)}
+.edw button.sel{box-shadow:inset 0 0 0 2px var(--ink);color:var(--ink)}
+.edw button:disabled{opacity:.35}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chips button{height:36px;padding:0 14px;border-radius:99px;background:var(--card);font-size:14px;font-weight:500}
+.chips button.on{background:var(--ink);color:var(--bg)}
+
+.nav{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;display:grid;grid-template-columns:repeat(3,1fr);width:min(280px,calc(100% - 48px));padding:4px;border-radius:16px;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 24px -12px rgba(0,0,0,.2)}
+.nav .ind{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/3);border-radius:12px;background:var(--ink);transition:transform .45s var(--spring)}
+.nav button{position:relative;z-index:1;height:40px;font-size:15px;font-weight:500;color:var(--ink2);text-align:center;transition:color .3s}
+.nav button.on{color:var(--bg)}
+
+.toast{position:fixed;top:max(16px,env(safe-area-inset-top));left:50%;z-index:200;transform:translate(-50%,-24px);opacity:0;pointer-events:none;padding:12px 16px;border-radius:14px;background:var(--ink);color:var(--bg);font-size:15px;font-weight:500;width:max-content;max-width:calc(100% - 48px);transition:all .4s var(--spring)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.cf{position:fixed;inset:0;z-index:150;background:rgba(17,17,17,.3);display:none;align-items:flex-end;justify-content:center}
+.cf.on{display:flex}
+.cf .bx{width:min(440px,100%);background:var(--bg);border-radius:24px 24px 0 0;padding:24px 24px max(24px,env(safe-area-inset-bottom));animation:sh .4s var(--spring) both}
+@keyframes sh{from{transform:translateY(100%)}to{transform:none}}
+.cf .bx .btn{margin-top:8px}
+
+.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.06em;margin-bottom:-.06em}
+.w>span{display:inline-block;animation:wu .8s var(--ease) both;animation-delay:calc(var(--d)*80ms + 80ms)}
+@keyframes wu{from{transform:translateY(105%)}to{transform:none}}
+.btn svg{transition:transform .35s var(--spring)}
+.btn:hover svg,.btn:active svg{transform:translateX(4px)}
+.btn{box-shadow:0 10px 24px -14px rgba(224,53,38,.9)}
+.btn.dark,.btn.soft{box-shadow:none}
+.last{display:flex;align-items:center;gap:12px;margin-top:24px;padding:14px 16px;border-radius:16px;background:var(--card)}
+.last i{width:8px;height:8px;border-radius:50%;background:var(--ink);flex:none}
+.last p{flex:1;min-width:0;font-size:15px;color:var(--ink2)}
+.last p b{color:var(--ink);font-weight:600}
+.wd i{transition:background .3s,transform .5s var(--spring)}
+.view.on .wd.done i{animation:dp .5s var(--spring) both;animation-delay:calc(var(--k)*60ms + 200ms)}
+@keyframes dp{from{transform:scale(0)}to{transform:scale(1.25)}}
+.logo i{display:inline-block;animation:blink 3.2s ease-in-out infinite}
+@keyframes blink{0%,86%,100%{opacity:1}92%{opacity:.25}}
+.rows .row:active{background:#FAFAF8}
+.rest .fill{transition:width .25s linear}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head><body>
+<div class="app">
+
+  <!-- HOJE -->
+  <main class="view on" id="v-hoje">
+    <header class="top"><div class="logo">rob<i>.</i></div><button class="av" data-nav="voce" aria-label="Você">R</button></header>
+    <section class="hero">
+      <div class="lb" id="date"></div>
+      <p class="s24" style="font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink2)" id="pre">hoje você vai de</p>
+      <h1 class="t56 s8" id="title"></h1>
+      <p class="muted s16" id="meta"></p>
+      <div class="bar s16" id="hbar" hidden><i id="hbar-i"></i></div>
+      <button class="btn s24" id="go"><span id="go-t">Começar treino</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </section>
+    <section class="s48">
+      <div class="sec-h"><span class="lb">Semana</span><span class="lb" id="wk-n"></span></div>
+      <div class="week" id="week"></div>
+      <div class="last" id="last" hidden><i></i><p id="last-t"></p></div>
+    </section>
+    <section class="s48">
+      <div class="sec-h"><span class="lb">Tá no pique?</span></div>
+      <div class="seg" id="pique"></div>
+      <p class="tip" id="tip" hidden></p>
+    </section>
+  </main>
+
+  <!-- FICHAS -->
+  <main class="view" id="v-fichas">
+    <header class="top"><div class="logo">rob<i>.</i></div><button class="av" data-nav="voce" aria-label="Você">R</button></header>
+    <h1 class="t56" style="padding-top:24px">Fichas</h1>
+    <p class="muted s8" id="f-meta"></p>
+    <div class="rows s24" id="fl"></div>
+  </main>
+
+  <!-- VOCÊ -->
+  <main class="view" id="v-voce">
+    <header class="top"><div class="logo">rob<i>.</i></div><span></span></header>
+    <h1 class="t56" style="padding-top:24px">Você</h1>
+    <p class="muted s8">nessa semana</p>
+    <div class="card stats3 s24"><div><b class="num" id="st-paid">0</b><span>treinos pagos</span></div><div><b class="num" id="st-sets">0</b><span>séries</span></div><div><b class="num" id="st-min">0</b><span>minutos</span></div></div>
+
+    <section class="s48"><div class="sec-h"><span class="lb">Peso corporal</span><span class="lb" id="bw-d"></span></div>
+      <div class="inp"><input type="number" inputmode="decimal" step="0.1" id="bw" placeholder="Seu peso em kg" aria-label="Peso em kg"><button class="btn dark" id="bw-s">Salvar</button></div>
+      <div id="bw-c"></div></section>
+
+    <section class="s48"><div class="sec-h"><span class="lb">Recordes</span></div><div class="rows" id="prs"></div></section>
+
+    <section class="s48"><div class="sec-h"><span class="lb">Calculadora 1RM</span></div>
+      <div class="inp"><input type="number" inputmode="decimal" id="rm-p" placeholder="Carga kg" aria-label="Carga"><input type="number" inputmode="numeric" id="rm-r" placeholder="Reps" aria-label="Repetições"><button class="btn dark" id="rm-b">Calcular</button></div>
+      <div id="rm-o"></div></section>
+
+    <section class="s48"><div class="sec-h"><span class="lb">Ajustar dias</span><span class="lb" id="ed-d"></span></div>
+      <div class="edw" id="ed-w"></div>
+      <p class="muted s16" id="ed-h"></p>
+      <div class="chips" id="ed-k"></div>
+      <div class="rows s16"><div class="row"><div class="m t17" style="font-weight:500">Marcar todas as séries da ficha</div><button class="tog" id="ed-all" aria-label="Marcar todas as séries"></button></div></div>
+      <button class="btn dark s16" id="ed-go"><span id="ed-go-t">Marcar como treinado</span></button></section>
+
+    <section class="s48"><div class="sec-h"><span class="lb">Ajustes</span></div>
+      <p class="muted" style="margin-bottom:8px">Descanso entre séries</p>
+      <div class="seg" id="rest-c"><button data-v="0">Off</button><button data-v="60">60s</button><button data-v="90">90s</button><button data-v="120">120s</button></div>
+      <p class="muted s24" style="margin-bottom:8px">Peso da sua barra</p>
+      <div class="seg" id="bar-c"><button data-v="10">10 kg</button><button data-v="15">15 kg</button><button data-v="20">20 kg</button></div>
+      <div class="rows s24">
+        <div class="row"><div class="m t17" style="font-weight:500">Tela sempre acesa no treino</div><button class="tog" id="o-wake" aria-label="Tela sempre acesa"></button></div>
+        <div class="row"><div class="m t17" style="font-weight:500">Som e vibração</div><button class="tog" id="o-sound" aria-label="Som e vibração"></button></div>
+      </div></section>
+
+    <section class="s48"><div class="sec-h"><span class="lb">Backup</span></div>
+      <textarea id="io" placeholder="Cole aqui um backup para restaurar" aria-label="Backup"></textarea>
+      <div class="inp s8"><button class="btn soft" id="io-c" style="flex:1;justify-content:center">Copiar backup</button><button class="btn soft" id="io-r" style="flex:1;justify-content:center">Restaurar</button></div></section>
+
+    <button class="link s48" id="reset">Resetar a semana</button>
+  </main>
+
+  <!-- TREINO -->
+  <main class="view" id="v-treino">
+    <header class="wt-top"><button class="x" id="leave" aria-label="Sair do treino"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><span class="clock num" id="clock">00:00</span></header>
+    <p class="lb" style="padding-top:24px" id="w-sub"></p>
+    <h1 class="t56 s8" id="w-title"></h1>
+    <p class="muted s16 num" id="w-meta"></p>
+    <div class="bar s16"><i id="w-bar"></i></div>
+    <div class="rows s24" id="exs"></div>
+    <button class="btn dark s24" id="finish"><span>Fechar treino</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+  </main>
+
+  <nav class="nav" id="nav"><span class="ind" id="ind"></span><button class="on" data-nav="hoje">Hoje</button><button data-nav="fichas">Fichas</button><button data-nav="voce">Você</button></nav>
+
+  <div class="rest" id="rest" role="timer" aria-live="polite"><div class="t num" id="r-t">1:30<span>descanso</span></div><button id="r-p">+15</button><button id="r-s">Pular</button><i class="fill" id="r-f"></i></div>
+  <div class="fin" id="fin"><p class="lb" style="color:rgba(255,255,255,.75)" id="fin-l"></p><h1 class="t56 s8">Você <em>foi.</em></h1><p class="s16" style="font-family:var(--serif);font-style:italic;font-size:22px;opacity:.9" id="fin-q"></p>
+    <div class="stats"><div><b class="num" id="fin-m">0</b><span>minutos</span></div><div><b class="num" id="fin-s">0</b><span>séries</span></div><div><b class="num" id="fin-e">0</b><span>exercícios</span></div></div>
+    <p class="lb s48" style="color:rgba(255,255,255,.6)">toque para voltar</p></div>
+  <div class="cf" id="cf"><div class="bx"><h2 class="t28" id="cf-t"></h2><p class="muted s8" id="cf-p" style="margin-bottom:16px"></p><button class="btn" id="cf-y"></button><button class="btn soft" id="cf-n" style="justify-content:center">Cancelar</button></div></div>
+  <div class="toast" id="toast" role="status"></div>
+</div>
+
+<script>
+const routines={
+ A:{title:'Push day',sub:'Peito, ombro e tríceps',exercises:[
+  {id:'a1',name:'Supino reto c/ barra',sets:4,defWeight:80,eq:'barra',alt:['Supino reto halteres','Supino máquina'],tip:'Pés firmes no chão, escápulas cravadas no banco.'},
+  {id:'a2',name:'Supino inclinado halt.',sets:4,defWeight:28,eq:'halter',alt:['Supino inclinado barra','Supino inclinado máquina'],tip:'Foca na contração do peitoral superior.'},
+  {id:'a3',name:'Crucifixo máq.',sets:3,defWeight:50,alt:['Crossover polia','Crucifixo halteres'],tip:'Imagina abraçar um tronco de árvore.'},
+  {id:'a4',name:'Desenvolvimento halt.',sets:3,defWeight:24,eq:'halter',alt:['Desenvolvimento máquina'],tip:'Desça até a orelha. Controle absoluto.'},
+  {id:'a5',name:'Elevação lateral',sets:3,defWeight:12,eq:'halter',alt:['Elevação lateral polia'],tip:'Cotovelos flexionados, jogue para os lados.'},
+  {id:'a6',name:'Tríceps corda',sets:3,defWeight:25,alt:['Tríceps barra reta','Tríceps francês'],tip:'Abre a corda no final do movimento pra esmagar.'},
+  {id:'a7',name:'Abs bicicleta',sets:3,defWeight:0,alt:['Abdominal supra','Prancha'],tip:'Rotação real de tronco, sem puxar a nuca.'},
+  {id:'a8',name:'Cardio final',sets:1,time:'15 min',isCardio:true,tip:'Mantém a constância. Suor limpo.'}]},
+ B:{title:'Lower post.',sub:'Glúteo e posterior',exercises:[
+  {id:'b1',name:'Elevação pélvica',sets:4,defWeight:100,eq:'barra',alt:['Elevação pélvica máquina'],tip:'Olhar pra frente, contrai o glúteo no topo.'},
+  {id:'b2',name:'Stiff',sets:4,defWeight:32,alt:['Stiff com halteres','Levantamento romeno'],tip:'Joga o quadril pra trás. Sente rasgar o posterior.'},
+  {id:'b3',name:'Mesa flexora',sets:3,defWeight:30,alt:['Cadeira flexora'],tip:'Pelve colada no banco o tempo todo.'},
+  {id:'b4',name:'Afundo passada longa',sets:3,defWeight:14,eq:'halter',alt:['Búlgaro','Afundo no smith'],tip:'Passada longa pra ativar mais o glúteo.'},
+  {id:'b5',name:'Cadeira abdutora',sets:3,defWeight:40,alt:['Abdução na polia'],tip:'Tronco levemente pra frente pra focar no alvo.'},
+  {id:'b6',name:'Panturrilha',sets:4,defWeight:30,alt:['Panturrilha no leg'],tip:'Amplitude máxima, desce alongando tudo.'},
+  {id:'b7',name:'Cardio final',sets:1,time:'20 min',isCardio:true,tip:'Solta a perna na esteira leve.'}]},
+ C:{title:'Pull day',sub:'Costas e bíceps',exercises:[
+  {id:'c1',name:'Puxada frente aberta',sets:4,defWeight:55,alt:['Puxada neutra','Barra fixa assistida'],tip:'Puxe com os cotovelos. Peito estufado.'},
+  {id:'c2',name:'Remada baixa',sets:4,defWeight:50,alt:['Remada máquina','Remada curvada'],tip:'Alongue as costas na ida e esmague na volta.'},
+  {id:'c3',name:'Remada unilateral',sets:3,defWeight:22,eq:'halter',alt:['Remada unilateral polia'],tip:'Puxe em direção ao quadril, não ao peito.'},
+  {id:'c4',name:'Rosca direta barra',sets:3,defWeight:15,alt:['Rosca direta polia','Rosca W'],tip:'Cotovelo fixo na costela. Sem roubar com o corpo.'},
+  {id:'c5',name:'Rosca martelo',sets:3,defWeight:14,eq:'halter',alt:['Rosca martelo corda'],tip:'Pegada neutra pra esmagar braquial.'},
+  {id:'c6',name:'Rosca inclinada halt.',sets:3,defWeight:12,eq:'halter',alt:['Rosca Scott'],tip:'Sinta o bíceps alongar no fim do movimento.'},
+  {id:'c7',name:'Prancha',sets:3,defWeight:0,alt:['Prancha lateral'],tip:'Glúteo contraído e umbigo nas costas.'},
+  {id:'c8',name:'Cardio final',sets:1,time:'15 min',isCardio:true,tip:'Mantém a frequência tranquila.'}]},
+ D:{title:'Lower glutes',sub:'Foco em glúteos',exercises:[
+  {id:'d1',name:'Agachamento halt.',sets:4,defWeight:24,eq:'halter',alt:['Agachamento goblet','Agachamento smith'],tip:'Joelho acompanha a ponta do pé na descida.'},
+  {id:'d2',name:'Leg press 45',sets:4,defWeight:140,eq:'leg',alt:['Leg horizontal','Hack'],tip:'Pés mais altos pra dar ênfase em glúteo.'},
+  {id:'d3',name:'Cadeira extensora',sets:3,defWeight:45,alt:['Extensora unilateral'],tip:'Pico de contração em cima, controla a volta.'},
+  {id:'d4',name:'Elevação pélvica',sets:4,defWeight:105,eq:'barra',alt:['Elevação pélvica máquina'],tip:'Um segundo de pausa no topo da contração.'},
+  {id:'d5',name:'Coice no cabo',sets:3,defWeight:17,alt:['Coice na máquina'],tip:'Movimento limpo, não precisa chutar o teto.'},
+  {id:'d6',name:'Panturrilha sentada',sets:4,defWeight:35,alt:['Panturrilha em pé'],tip:'Sobe rápido, desce lento. Foco no solear.'},
+  {id:'d7',name:'Cardio final',sets:1,time:'15 min',isCardio:true,tip:'Ritmo constante.'}]},
+ E:{title:'Upper body',sub:'Peito e braços',exercises:[
+  {id:'e1',name:'Supino inclinado halt.',sets:4,defWeight:28,eq:'halter',alt:['Supino inclinado barra'],tip:'Foco no clavicular. Cadência é tudo.'},
+  {id:'e2',name:'Crossover polia',sets:3,defWeight:20,alt:['Crucifixo máquina'],tip:'Cruze os cabos no final pra maior contração.'},
+  {id:'e3',name:'Rosca direta',sets:3,defWeight:14,alt:['Rosca polia'],tip:'Movimento completo, sem encurtar embaixo.'},
+  {id:'e4',name:'Rosca martelo',sets:3,defWeight:12,eq:'halter',alt:['Rosca martelo corda'],tip:'Trabalho focado no antebraço e braquiorradial.'},
+  {id:'e5',name:'Tríceps corda',sets:3,defWeight:25,alt:['Tríceps barra reta'],tip:'Puxa pra baixo e separa as mãos no final.'},
+  {id:'e6',name:'Tríceps francês',sets:3,defWeight:20,alt:['Tríceps testa'],tip:'Alongamento máximo atrás da cabeça.'},
+  {id:'e7',name:'Abs infra',sets:3,defWeight:0,alt:['Elevação de pernas'],tip:'Foco no abdômen, não balance a perna.'},
+  {id:'e8',name:'Cardio final',sets:1,time:'15 min',isCardio:true,tip:'Suor limpo pra fechar a semana.'}]}};
+const PIQUE=[{k:'Mortão 😵',n:'Mortão',t:'Tira uns 10% da carga e foca na execução. Treino feito vale mais que treino perfeito.'},{k:'Suave 😐',n:'Suave',t:'Aquece bem e deixa o corpo acordar no caminho.'},{k:'Bora 🔥',n:'Bora',t:'Carga cheia. Respeita o descanso e amassa série por série.'},{k:'Modo Besta 🚀',n:'Besta',t:'Dia de recorde. Tenta +2,5 kg no primeiro exercício.'}];
+const QUOTES=['Seu eu de amanhã vai agradecer.','Pagou o preço. Pode descansar.','Endorfina no talo.','O shape não vai sozinho.'];
+const PLATES=[25,20,15,10,5,2.5,1.25];/* dados: mesmas chaves das versões anteriores */
+const K={state:'rob_workout_state_v8',loads:'rob_loads_v8',hist:'rob_history_v8',bw:'rob_body_weight',days:'rob_days_v9',week:'rob_week_v9',mood:'rob_mood_v9',prs:'rob_prs_v9',sess:'rob_sessions_v9',weights:'rob_weights_v9',rest:'rob_rest_v9',wmin:'rob_week_min_v9',bar:'rob_bar_v10',swap:'rob_swap_v11',opt:'rob_opts_v11',prd:'rob_prdates_v11'};
+const get=(k,d)=>{try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v);}catch(e){return d;}};
+const set=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
+const $=id=>document.getElementById(id),$$=s=>[...document.querySelectorAll(s)];
+const dk=(d=new Date())=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const ws=(d=new Date())=>{const x=new Date(d);x.setHours(12,0,0,0);x.setDate(x.getDate()-x.getDay());return x;};
+const kg=v=>String(Math.round(v*100)/100).replace('.',',');
+const allEx=()=>Object.values(routines).flatMap(r=>r.exercises);
+const OPT=()=>Object.assign({wake:true,sound:true},get(K.opt,{}));
+(function(){const wk=dk(ws());
+  if(get(K.week,null)===null){const o=get(K.hist,[]),s=ws();set(K.days,o.map(i=>{const d=new Date(s);d.setDate(d.getDate()+i);return dk(d);}));set(K.week,wk);}
+  else if(get(K.week)!==wk){set(K.state,{});set(K.hist,[]);set(K.wmin,0);set(K.swap,{});set(K.week,wk);}
+  if(!get(K.weights,null)){const b=localStorage.getItem(K.bw);set(K.weights,b?[{d:dk(),w:parseFloat(b)}]:[]);}
+  if(get(K.prs,null)===null){const L=get(K.loads,{}),p={};allEx().forEach(e=>{if(e.defWeight)p[e.id]=Math.max(e.defWeight,parseFloat(L[e.id])||0);});set(K.prs,{base:p,count:0});}})();
+
+/* util */
+let tT;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('on'),2200);}
+let AC;function beep(f=660,d=.1,g=.05,dl=0){if(!OPT().sound)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();const t=AC.currentTime+dl,o=AC.createOscillator(),v=AC.createGain();o.type='sine';o.frequency.value=f;v.gain.setValueAtTime(0,t);v.gain.linearRampToValueAtTime(g,t+.01);v.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(v).connect(AC.destination);o.start(t);o.stop(t+d+.02);}catch(e){}}
+const buzz=p=>{if(OPT().sound)try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
+function ask(t,p,y,fn){$('cf-t').textContent=t;$('cf-p').textContent=p;$('cf-y').textContent=y;$('cf').classList.add('on');$('cf-y').onclick=()=>{$('cf').classList.remove('on');fn();};}
+$('cf-n').onclick=()=>$('cf').classList.remove('on');$('cf').onclick=e=>{if(e.target.id==='cf')$('cf').classList.remove('on');};
+function words(el){let k=0;const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(p=>{if(!p)return;if(/^\s+$/.test(p)){f.appendChild(document.createTextNode(p));return;}const w=document.createElement('span');w.className='w';const i=document.createElement('span');i.style.setProperty('--d',k++);i.textContent=p;w.appendChild(i);f.appendChild(w);});c.replaceWith(f);}else if(c.nodeType===1)walk(c);});};walk(el);}
+const ttl=t=>{const p=t.split(' ');return p.length>1?p.slice(0,-1).join(' ')+' <em>'+p[p.length-1]+'</em>':t;};
+function ring(p){return '<svg class="ring" viewBox="0 0 36 36"><circle class="b" cx="18" cy="18" r="15"/><circle class="p" cx="18" cy="18" r="15" stroke-dasharray="94.2" stroke-dashoffset="'+(94.2*(1-p))+'"/></svg>';}
+const CHEV='<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>';
+function prog(k,st=get(K.state,{})){let t=0,d=0;routines[k].exercises.forEach(e=>{t+=e.sets;d+=((st[k]&&st[k][e.id])||[]).length;});return {t,d,p:t?d/t:0};}
+function nextKey(){const st=get(K.state,{}),ks=Object.keys(routines);return ks.find(k=>{const p=prog(k,st);return p.d>0&&p.p<1;})||ks.find(k=>prog(k,st).p<1)||null;}
+const loadOf=e=>{const L=get(K.loads,{});return L[e.id]!==undefined?parseFloat(L[e.id]):e.defWeight;};
+function plates(total,eq){const bar=get(K.bar,20),base=eq==='leg'?0:bar,side=(total-base)/2;if(side<0)return null;const o=[];let r=Math.round(side*100)/100;PLATES.forEach(p=>{while(r>=p-1e-6){o.push(p);r=Math.round((r-p)*100)/100;}});return o.length?o.map(kg).join(' + '):'só a barra';}
+
+/* nav */
+const TABS=['hoje','fichas','voce'];
+function view(id){$$('.view').forEach(v=>v.classList.remove('on'));void $('v-'+id).offsetWidth;$('v-'+id).classList.add('on');
+  const i=TABS.indexOf(id);if(i>-1){$('nav').style.display='grid';$$('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===id));$('ind').style.transform='translateX('+(i*100)+'%)';}
+  scrollTo(0,0);if(id==='hoje')hoje();if(id==='fichas')fichas();if(id==='voce')voce();}
+document.addEventListener('click',e=>{const n=e.target.closest('[data-nav]');if(n){view(n.dataset.nav);return;}const o=e.target.closest('[data-open]');if(o)openW(o.dataset.open);});
+
+/* hoje */
+function hoje(){const k=nextKey();const d=new Date();$('date').textContent=d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'short'}).replace('.','').replace('-feira','');
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=-12.43&longitude=-39.25&current_weather=true').then(r=>r.json()).then(x=>{$('date').textContent+=' · '+Math.round(x.current_weather.temperature)+'°C';}).catch(()=>{});
+  if(k){const r=routines[k],p=prog(k),mins=Math.round(p.t*2.2);
+    $('pre').textContent=p.d?'bora terminar o':'hoje você vai de';$('title').innerHTML=ttl(r.title);words($('title'));
+    $('meta').textContent=r.sub+' · '+r.exercises.length+' exercícios · '+(p.d?(p.t-p.d)+' séries faltando':'~'+mins+' min');
+    $('hbar').hidden=!p.d;setTimeout(()=>$('hbar-i').style.width=(p.p*100)+'%',150);
+    $('go-t').textContent=p.d?'Continuar treino':'Começar treino';$('go').onclick=()=>openW(k);
+  } else {$('pre').textContent='essa semana';$('title').innerHTML='Tá <em>paga.</em>';$('meta').textContent='5 de 5 fichas feitas. Descansa, campeão.';$('hbar').hidden=true;$('go-t').textContent='Ver fichas';$('go').onclick=()=>view('fichas');}
+  const D=get(K.days,[]),s=ws(),L=['D','S','T','Q','Q','S','S'],t=dk();let h='',n=0;
+  for(let i=0;i<7;i++){const x=new Date(s);x.setDate(x.getDate()+i);const kk=dk(x),on=D.includes(kk);if(on)n++;h+='<div class="wd'+(on?' done':'')+(kk===t?' today':'')+'" style="--k:'+i+'">'+L[i]+'<i></i></div>';}
+  $('week').innerHTML=h;$('wk-n').textContent=n+' de 7 dias';
+  const S=get(K.sess,[]);if(S.length){const l=S[0],diff=Math.round((new Date(dk()+'T12:00')-new Date(l.d+'T12:00'))/864e5),quando=diff===0?'hoje':diff===1?'ontem':diff<7?'há '+diff+' dias':new Date(l.d+'T12:00').toLocaleDateString('pt-BR',{day:'numeric',month:'short'});
+    const trained=get(K.days,[]).includes(t);$('last-t').innerHTML='Último treino: <b>'+routines[l.k].title+'</b>, '+quando+'.'+(!trained&&diff>=1&&k?' Hoje é dia de '+routines[k].title.toLowerCase().replace(/\.$/,'')+'.':'');$('last').hidden=false;}else $('last').hidden=true;
+  pique();}
+function pique(){const cur=get(K.mood,{})[dk()],P=PIQUE.find(x=>x.k===cur);
+  $('pique').innerHTML=PIQUE.map(x=>'<button data-pq="'+x.k+'" class="'+(cur===x.k?'on':'')+'">'+x.n+'</button>').join('');
+  $('tip').hidden=!P;if(P)$('tip').textContent=P.t;}
+$('pique').onclick=e=>{const b=e.target.closest('[data-pq]');if(!b)return;const m=get(K.mood,{});m[dk()]=b.dataset.pq;set(K.mood,m);pique();buzz(8);};
+
+/* fichas */
+function fichas(){const st=get(K.state,{}),nk=nextKey();let paid=0;
+  $('fl').innerHTML=Object.keys(routines).map(k=>{const r=routines[k],p=prog(k,st),done=p.p===1;if(done)paid++;
+    return '<button class="row" data-open="'+k+'">'+ring(p.p)+'<span class="m"><span class="t17" style="display:block">'+r.title+'</span><span class="sub" style="display:block">'+r.sub+'</span></span>'+(done?'<span class="done-t">Pago</span>':k===nk?'<span class="done-t">'+(p.d?'Em andamento':'Próximo')+'</span>':CHEV)+'</button>';}).join('');
+  $('f-meta').textContent=paid+' de 5 pagas nessa semana';$$('#fl .ring .p').forEach(c=>{const v=c.getAttribute('stroke-dashoffset');c.setAttribute('stroke-dashoffset','94.2');requestAnimationFrame(()=>requestAnimationFrame(()=>c.setAttribute('stroke-dashoffset',v)));});}
+
+/* treino */
+let AK=null,t0=0,clk=null,fin=false,openId=null,wl=null;
+function exHTML(e,i){const st=get(K.state,{}),da=(st[AK]&&st[AK][e.id])||[],done=da.length===e.sets,sw=get(K.swap,{})[e.id];
+  let dots='';if(e.isCardio)dots='<button class="dot cardio'+(da.includes(1)?' on':'')+'" data-set="1" data-ex="'+e.id+'" data-total="1">'+e.time+'</button>';
+  else for(let s=1;s<=e.sets;s++)dots+='<button class="dot'+(da.includes(s)?' on':'')+'" data-set="'+s+'" data-ex="'+e.id+'" data-total="'+e.sets+'" aria-label="Série '+s+'">'+s+'</button>';
+  const v=loadOf(e),meta=e.isCardio?'1 sessão':e.sets+' séries'+(e.defWeight?' · '+kg(v)+' kg':'');
+  let det='<p class="tipx">'+e.tip+'</p>';
+  if(e.defWeight){const pr=get(K.prs,{base:{}}).base[e.id]||v;
+    det+='<div class="load"><button data-step="-2.5" data-ex="'+e.id+'" aria-label="Menos 2,5 kg">−</button><input type="number" inputmode="decimal" step="0.5" value="'+v+'" data-load="'+e.id+'" aria-label="Carga em kg"><button data-step="2.5" data-ex="'+e.id+'" aria-label="Mais 2,5 kg">+</button><span>kg</span></div>'+
+      '<p class="info" id="in-'+e.id+'">'+infoLine(e,v,pr)+'</p>';}
+  if(e.alt)det+='<p class="info">Aparelho ocupado? Troque só por hoje:</p><div class="alts">'+e.alt.map(a=>'<button data-swap="'+e.id+'" data-name="'+a+'" class="'+(sw===a?'on':'')+'">'+a+'</button>').join('')+(sw?'<button data-swap="'+e.id+'" data-name="">Original</button>':'')+'</div>';
+  return '<div class="ex'+(done?' done':'')+'" id="ex-'+e.id+'"><button class="ex-h" data-tog="'+e.id+'"><span class="n num">'+String(i+1).padStart(2,'0')+'</span><span class="m"><span class="t17" style="display:block">'+(sw||e.name)+'</span><span class="sub muted" style="display:block;margin-top:2px" id="mt-'+e.id+'">'+meta+(sw?' · trocado hoje':'')+'</span></span></button><div class="dots">'+dots+'</div><div class="det">'+det+'</div></div>';}
+function infoLine(e,v,pr){let s='';
+  if(e.eq==='barra'||e.eq==='leg'){const p=plates(v,e.eq);s+=p?'Cada lado: <b>'+p+'</b>. ':'';}
+  else if(e.eq==='halter')s+='<b>'+kg(v/2)+' kg</b> em cada halter. ';
+  s+=v>=pr?'<b>Seu recorde.</b>':'Recorde: '+kg(pr)+' kg.';return s;}
+function openW(k){AK=k;fin=false;const r=routines[k],st=get(K.state,{});const sk='rob_start_'+k+'_'+dk();t0=parseInt(sessionStorage.getItem(sk)||'0')||Date.now();try{sessionStorage.setItem(sk,t0);}catch(e){}
+  $('w-sub').textContent=r.sub;$('w-title').innerHTML=ttl(r.title);words($('w-title'));$('exs').innerHTML=r.exercises.map(exHTML).join('');
+  const first=r.exercises.find(e=>((st[k]&&st[k][e.id])||[]).length<e.sets);toggle(first?first.id:null);
+  $('nav').style.display='none';$$('.view').forEach(v=>v.classList.remove('on'));$('v-treino').classList.add('on');scrollTo(0,0);
+  clearInterval(clk);tick();clk=setInterval(tick,1000);meta(false);wake(true);}
+function toggle(id){openId=openId===id?null:id;$$('.ex').forEach(x=>x.classList.toggle('open',x.id==='ex-'+openId));}
+function tick(){const s=Math.floor((Date.now()-t0)/1000);$('clock').textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+async function wake(on){try{if(on&&OPT().wake&&'wakeLock' in navigator)wl=await navigator.wakeLock.request('screen');else if(!on&&wl){await wl.release();wl=null;}}catch(e){}}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&$('v-treino').classList.contains('on'))wake(true);});
+function saveLoad(id,val){val=Math.max(0,Math.round(parseFloat(val)*10)/10);if(isNaN(val))return;const L=get(K.loads,{});L[id]=val;set(K.loads,L);
+  const e=allEx().find(x=>x.id===id),P=get(K.prs,{base:{},count:0}),old=P.base[id]||0;
+  if(val>old){P.base[id]=val;P.count++;set(K.prs,P);const pd=get(K.prd,{});pd[id]=dk();set(K.prd,pd);beep(880,.1);beep(1175,.14,.05,.1);toast('Novo recorde: '+kg(val)+' kg');}
+  $('in-'+id).innerHTML=infoLine(e,val,Math.max(old,val));$('mt-'+id).textContent=e.sets+' séries · '+kg(val)+' kg';}
+$('exs').addEventListener('click',e=>{
+  const s=e.target.closest('[data-step]');if(s){const i=document.querySelector('[data-load="'+s.dataset.ex+'"]');i.value=Math.max(0,(parseFloat(i.value)||0)+parseFloat(s.dataset.step));buzz(5);clearTimeout(i._t);i._t=setTimeout(()=>saveLoad(s.dataset.ex,i.value),500);return;}
+  const sw=e.target.closest('[data-swap]');if(sw){const S=get(K.swap,{});if(sw.dataset.name)S[sw.dataset.swap]=sw.dataset.name;else delete S[sw.dataset.swap];set(K.swap,S);const ex=routines[AK].exercises.find(x=>x.id===sw.dataset.swap);$('ex-'+ex.id).outerHTML=exHTML(ex,routines[AK].exercises.indexOf(ex));openId=null;toggle(ex.id);toast(sw.dataset.name?'Trocado por '+sw.dataset.name:'De volta ao original');return;}
+  const b=e.target.closest('[data-set]');if(b){mark(b);return;}
+  const t=e.target.closest('[data-tog]');if(t)toggle(t.dataset.tog);});
+$('exs').addEventListener('change',e=>{const i=e.target.closest('[data-load]');if(i)saveLoad(i.dataset.load,i.value);});
+function mark(b){const id=b.dataset.ex,n=+b.dataset.set,total=+b.dataset.total;b.classList.toggle('on');const on=b.classList.contains('on'),st=get(K.state,{});
+  st[AK]=st[AK]||{};st[AK][id]=st[AK][id]||[];if(on){if(!st[AK][id].includes(n))st[AK][id].push(n);}else st[AK][id]=st[AK][id].filter(x=>x!==n);set(K.state,st);
+  const full=st[AK][id].length===total;$('ex-'+id).classList.toggle('done',full);if(on){beep(full?784:587);buzz(10);}
+  const all=meta(true);const e=allEx().find(x=>x.id===id);
+  if(on&&!all&&!e.isCardio)restGo();
+  if(on&&full&&!all){const nx=routines[AK].exercises.find(x=>((st[AK]&&st[AK][x.id])||[]).length<x.sets);if(nx)setTimeout(()=>{openId=null;toggle(nx.id);$('ex-'+nx.id).scrollIntoView({behavior:'smooth',block:'center'});},600);}}
+function meta(check){const t=$$('#exs .dot').length,d=$$('#exs .dot.on').length;$('w-meta').textContent=d+' de '+t+' séries';$('w-bar').style.width=(t?d/t*100:0)+'%';
+  if(check&&d===t&&t>0&&!fin){fin=true;restStop();setTimeout(()=>done(false),500);return true;}return false;}
+$('finish').onclick=()=>{const d=$$('#exs .dot.on').length;if(!d){toast('Marca pelo menos uma série.');return;}ask('Fechar treino?','Você fez '+d+' séries. O que faltou continua salvo na ficha.','Fechar e registrar',()=>{fin=true;restStop();done(true);});};
+$('leave').onclick=()=>{if(!$$('#exs .dot.on').length){leave();return;}ask('Sair do treino?','Suas séries ficam salvas. Dá pra voltar depois.','Sair',leave);};
+
+/* descanso */
+let rE=0,rD=0,rT=null;
+function restGo(){const s=get(K.rest,90);if(!s)return;rD=s*1000;rE=Date.now()+rD;$('rest').classList.add('on');clearInterval(rT);rTick();rT=setInterval(rTick,250);}
+function rTick(){const l=Math.max(0,rE-Date.now()),s=Math.ceil(l/1000);$('r-t').innerHTML=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+'<span>'+(l?'descanso':'bora')+'</span>';$('r-f').style.width=(100*(1-l/rD))+'%';
+  if(l<=0){clearInterval(rT);beep(880,.15);beep(1175,.2,.05,.2);buzz([100,60,100]);setTimeout(restStop,1800);}}
+function restStop(){clearInterval(rT);$('rest').classList.remove('on');}
+$('r-p').onclick=()=>{rE+=15000;rD+=15000;};$('r-s').onclick=restStop;
+
+/* fim */
+function done(partial){clearInterval(clk);const mins=Math.max(1,Math.round((Date.now()-t0)/60000));try{sessionStorage.removeItem('rob_start_'+AK+'_'+dk());}catch(e){}
+  const D=get(K.days,[]);if(!D.includes(dk())){D.push(dk());set(K.days,D);}const H=get(K.hist,[]),ti=new Date().getDay();if(!H.includes(ti)){H.push(ti);set(K.hist,H);}
+  const st=get(K.state,{}),r=routines[AK];let sets=0,exd=0;r.exercises.forEach(e=>{const n=((st[AK]&&st[AK][e.id])||[]).length;sets+=n;if(n===e.sets)exd++;});
+  const S=get(K.sess,[]);S.unshift({d:dk(),k:AK,min:mins,sets});set(K.sess,S.slice(0,40));set(K.wmin,get(K.wmin,0)+mins);
+  const paid=Object.keys(routines).filter(k=>prog(k,st).p===1).length;
+  $('fin-l').textContent=paid===5?'semana completa · 5 de 5':r.title+' · pago';$('fin-q').textContent=paid===5?'A semana é sua.':partial?'Nem todo dia é completo. Mas você veio.':QUOTES[Math.floor(Math.random()*QUOTES.length)];
+  $('fin-m').textContent=mins;$('fin-s').textContent=sets;$('fin-e').textContent=exd+'/'+r.exercises.length;$('fin').classList.add('on');
+  if(paid===5){set(K.state,{});set(K.hist,[]);}beep(523,.14);beep(659,.14,.05,.12);beep(784,.25,.05,.24);buzz([60,40,60]);wake(false);window.fT=setTimeout(closeFin,6000);}
+function closeFin(){clearTimeout(window.fT);$('fin').classList.remove('on');leave();}
+$('fin').onclick=closeFin;
+function leave(){clearInterval(clk);restStop();wake(false);view('hoje');}
+
+/* ajustar dias */
+let EDD=null,EDK=null,EDA=false;
+function edit(){
+  const D=get(K.days,[]),s=ws(),t=dk(),L=['D','S','T','Q','Q','S','S'];
+  const days=[...Array(7)].map((_,i)=>{const x=new Date(s);x.setDate(x.getDate()+i);return dk(x);});
+  if(!EDD||!days.includes(EDD)){const y=new Date();y.setDate(y.getDate()-1);const yk=dk(y);EDD=days.includes(yk)&&!D.includes(yk)?yk:t;}
+  EDK=EDK||nextKey()||'A';
+  const on=D.includes(EDD);
+  $('ed-w').innerHTML=days.map((k,i)=>'<button data-ed="'+k+'" class="'+(D.includes(k)?'done ':'')+(k===EDD?'sel':'')+'"'+(k>t?' disabled':'')+'>'+L[i]+'<i></i></button>').join('');
+  $('ed-d').textContent=new Date(EDD+'T12:00').toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'short'}).replace('-feira','');
+  $('ed-k').innerHTML=Object.keys(routines).map(k=>'<button data-edk="'+k+'" class="'+(k===EDK?'on':'')+'">'+routines[k].title+'</button>').join('');
+  $('ed-all').classList.toggle('on',EDA);
+  $('ed-h').textContent=on?'Esse dia está marcado. Toque abaixo pra desmarcar.':'Esqueceu de fechar? Escolha o dia e a ficha que você fez.';
+  $('ed-go-t').textContent=on?'Desmarcar dia':'Marcar como treinado';
 }
-function undoMala(){if(malaCount>0)malaCount--;localStorage.setItem('mala_108',malaCount);renderMala()}
-function resetMala(){malaCount=0;localStorage.setItem('mala_108','0');renderMala();toast('Japamala recomeçada')}
-function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.classList.remove('show'),2200)}
-function confetti(){for(let i=0;i<12;i++){const x=document.createElement('span');x.textContent='*';x.style.cssText=`position:fixed;z-index:100;color:${i%2?'#b20000':'#c4a15a'};left:${45+Math.random()*10}%;top:45%;font-size:${12+Math.random()*16}px;pointer-events:none;animation:fall .8s ease-out forwards`;document.body.appendChild(x);setTimeout(()=>x.remove(),900)}}
-const style=document.createElement('style');style.textContent='@keyframes fall{to{transform:translate('+(-90+Math.random()*180)+'px,'+(80+Math.random()*180)+'px) rotate(180deg);opacity:0}}';document.head.appendChild(style);
-let sx=0;document.addEventListener('touchstart',e=>sx=e.changedTouches[0].screenX,{passive:true});document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-sx;if(document.getElementById('reader').classList.contains('active')&&Math.abs(dx)>65){if(dx<0&&DATA[currentDay+1])openReader(currentDay+1);if(dx>0&&DATA[currentDay-1])openReader(currentDay-1)}},{passive:true});
-window.addEventListener('keydown',e=>{if(document.getElementById('reader').classList.contains('active')){if(e.key==='ArrowRight'&&DATA[currentDay+1])openReader(currentDay+1);if(e.key==='ArrowLeft'&&DATA[currentDay-1])openReader(currentDay-1)}});
-renderHome();renderMala();
-</script></body></html>
+$('ed-w').onclick=e=>{const b=e.target.closest('[data-ed]');if(!b||b.disabled)return;EDD=b.dataset.ed;const S=get(K.sess,[]).find(x=>x.d===EDD);if(S)EDK=S.k;edit();};
+$('ed-k').onclick=e=>{const b=e.target.closest('[data-edk]');if(b){EDK=b.dataset.edk;edit();}};
+$('ed-all').onclick=()=>{EDA=!EDA;edit();};
+$('ed-go').onclick=()=>{
+  const D=get(K.days,[]),H=get(K.hist,[]),S0=get(K.sess,[]),wd=new Date(EDD+'T12:00').getDay();
+  if(D.includes(EDD)){
+    set(K.days,D.filter(x=>x!==EDD));set(K.sess,S0.filter(x=>x.d!==EDD));set(K.hist,H.filter(x=>x!==wd));toast('Dia desmarcado.');
+  } else {
+    const st=get(K.state,{});
+    if(EDA){st[EDK]={};routines[EDK].exercises.forEach(e=>{st[EDK][e.id]=Array.from({length:e.sets},(_,i)=>i+1);});set(K.state,st);}
+    let n=0;routines[EDK].exercises.forEach(e=>n+=((st[EDK]&&st[EDK][e.id])||[]).length);
+    D.push(EDD);set(K.days,D);if(!H.includes(wd)){H.push(wd);set(K.hist,H);}
+    S0.push({d:EDD,k:EDK,min:0,sets:n});S0.sort((a,b)=>a.d<b.d?1:-1);set(K.sess,S0.slice(0,40));toast('Treino registrado.');
+  }
+  EDA=false;voce();
+};
+
+/* você */
+function voce(){const st=get(K.state,{});let paid=0,sets=0;Object.keys(routines).forEach(k=>{const p=prog(k,st);sets+=p.d;if(p.p===1)paid++;});
+  $('st-paid').textContent=paid;$('st-sets').textContent=sets;$('st-min').textContent=get(K.wmin,0)||'·';
+  const P=get(K.prs,{base:{}}).base,pd=get(K.prd,{});const top=Object.keys(P).map(id=>({id,v:P[id],e:allEx().find(x=>x.id===id)})).filter(x=>x.e&&(x.e.eq==='barra'||x.e.eq==='leg'||x.v>=40)).sort((a,b)=>b.v-a.v).slice(0,5);
+  $('prs').innerHTML=top.map(x=>'<div class="row"><span class="m t17" style="font-weight:500">'+x.e.name+'</span><span class="t17 num">'+kg(x.v)+' kg</span></div>').join('');
+  segs();bw();edit();}
+function segs(){const r=get(K.rest,90),b=get(K.bar,20),o=OPT();$$('#rest-c button').forEach(x=>x.classList.toggle('on',+x.dataset.v===r));$$('#bar-c button').forEach(x=>x.classList.toggle('on',+x.dataset.v===b));$('o-wake').classList.toggle('on',o.wake);$('o-sound').classList.toggle('on',o.sound);}
+$('rest-c').onclick=e=>{const b=e.target.closest('[data-v]');if(b){set(K.rest,+b.dataset.v);segs();}};
+$('bar-c').onclick=e=>{const b=e.target.closest('[data-v]');if(b){set(K.bar,+b.dataset.v);segs();}};
+['wake','sound'].forEach(k=>$('o-'+k).onclick=()=>{const o=OPT();o[k]=!o[k];set(K.opt,o);segs();});
+function bw(){const W=get(K.weights,[]);$('bw-d').textContent=W.length?kg(W[W.length-1].w)+' kg':'';
+  if(W.length<2){$('bw-c').innerHTML='';return;}const P=W.slice(-12),v=P.map(p=>p.w),mn=Math.min(...v)-.3,mx=Math.max(...v)+.3,xy=P.map((p,i)=>[i/(P.length-1)*300,44-(p.w-mn)/(mx-mn)*40]);
+  const df=Math.round((v[v.length-1]-v[0])*10)/10;
+  $('bw-c').innerHTML='<svg class="spark" viewBox="0 0 300 48" preserveAspectRatio="none" aria-hidden="true"><path d="M'+xy.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L')+'" fill="none" stroke="#111" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="muted s8">'+(df===0?'Estável':(df>0?'+':'')+kg(df)+' kg')+' desde '+new Date(P[0].d+'T12:00').toLocaleDateString('pt-BR',{day:'numeric',month:'short'})+'</p>';}
+$('bw-s').onclick=()=>{const w=parseFloat($('bw').value);if(!w){toast('Digite o peso.');return;}const W=get(K.weights,[]),t=dk(),i=W.findIndex(x=>x.d===t);if(i>-1)W[i].w=w;else W.push({d:t,w});set(K.weights,W);try{localStorage.setItem(K.bw,String(w));}catch(e){}$('bw').value='';bw();toast('Peso salvo.');};
+$('rm-b').onclick=()=>{const p=parseFloat($('rm-p').value),r=parseInt($('rm-r').value);if(!(p&&r)){toast('Preencha carga e reps.');return;}const rm=Math.round(p*(1+r/30)),pl=plates(rm,'barra');
+  $('rm-o').innerHTML='<div class="out"><p class="t28 num">'+rm+' kg</p><p class="muted s8 num">90% '+Math.round(rm*.9)+' · 80% '+Math.round(rm*.8)+' · 70% '+Math.round(rm*.7)+' · 60% '+Math.round(rm*.6)+'</p>'+(pl?'<p class="muted s8">Na barra: '+pl+' de cada lado.</p>':'')+'</div>';};
+$('io-c').onclick=()=>{const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('rob_'))o[k]=localStorage.getItem(k);}const t=JSON.stringify(o);$('io').value=t;
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Backup copiado.')).catch(()=>{$('io').select();toast('Backup selecionado. É só copiar.');});};
+$('io-r').onclick=()=>{let o;try{o=JSON.parse($('io').value);}catch(e){toast('Esse texto não é um backup do rob.');return;}ask('Restaurar backup?','Substitui os dados deste celular pelos do backup.','Restaurar',()=>{Object.keys(o).forEach(k=>{if(k.startsWith('rob_'))localStorage.setItem(k,o[k]);});location.reload();});};
+$('reset').onclick=()=>ask('Resetar a semana?','Zera fichas e calendário da semana. Cargas e recordes continuam.','Resetar',()=>{set(K.state,{});set(K.hist,[]);set(K.days,get(K.days,[]).filter(d=>d<dk(ws())));set(K.wmin,0);set(K.swap,{});toast('Semana resetada.');voce();});
+
+hoje();
+</script>
+</body>
+</html>
