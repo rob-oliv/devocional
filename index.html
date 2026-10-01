@@ -6,16 +6,16 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="rob.">
-<meta name="theme-color" content="#F2F2F0">
+<meta name="theme-color" content="#0B0B0B">
 <title>rob.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script>
 (function(){var c=document.createElement('canvas');c.width=512;c.height=512;var x=c.getContext('2d');
-  x.fillStyle='#F2F2F0';x.fillRect(0,0,512,512);x.fillStyle='#111111';x.textAlign='center';x.textBaseline='middle';
+  x.fillStyle='#0B0B0B';x.fillRect(0,0,512,512);x.fillStyle='#F1EBDD';x.textAlign='center';x.textBaseline='middle';
   x.font='700 170px -apple-system, "Helvetica Neue", Arial, sans-serif';x.fillText('rob',236,262);
-  x.beginPath();x.arc(398,318,26,0,Math.PI*2);x.fillStyle='#E03526';x.fill();
+  x.beginPath();x.arc(398,318,26,0,Math.PI*2);x.fillStyle='#F1EBDD';x.fill();
   var l=document.createElement('link');l.rel='apple-touch-icon';l.href=c.toDataURL('image/png');document.head.appendChild(l);})();
 </script>
 <style>
@@ -193,6 +193,56 @@ textarea{width:100%;height:96px;border:0;border-radius:14px;background:var(--car
 .rows .row:active{background:#FAFAF8}
 .rest .fill{transition:width .25s linear}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+/* tema: estilo brasil */
+:root{
+  --bg:#0B0B0B; --card:#161616; --ink:#F1EBDD; --ink2:#A39E92; --ink3:#5E5B54; --line:#262626; --red:#F1EBDD;
+  --display:'Archivo Black','Helvetica Neue',Arial,sans-serif; --mono:'Space Mono',ui-monospace,Menlo,monospace;
+}
+html,body{background:var(--bg)}
+em,.tip,.det p.tipx,#pre,#fin-q{font-style:normal!important}
+
+/* títulos: caixa alta, empilhados, última palavra vazada */
+.t56,.t28,.logo{font-family:var(--display);text-transform:uppercase;font-weight:400}
+.t56{font-size:64px;letter-spacing:-.02em;line-height:.9}
+.t28{font-size:28px;letter-spacing:-.01em;line-height:1}
+.t56 .w{display:block}
+.t56 em,.t28 em{font-family:var(--display);color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.logo{font-size:20px;letter-spacing:.04em}
+.logo i{color:var(--ink)}
+
+/* rótulos em mono, espaçados */
+.lb,.done-t,.stats3 span,.fin .stats span{font-family:var(--mono);font-size:11px;letter-spacing:.16em;font-weight:400}
+#pre{font-family:var(--mono)!important;font-size:12px!important;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)!important}
+.tip,.det p.tipx{font-family:var(--sans);font-size:15px;line-height:1.4}
+.clock{font-family:var(--mono)}
+
+/* molduras finas */
+.card,.rows,.last,.seg,.edw button,.chips button,.inp input,textarea{border:1px solid var(--line)}
+.rows .row:active{background:#1C1C1C}
+
+/* botões: creme com texto escuro; o escuro vira contorno */
+.btn{color:var(--bg);box-shadow:none}
+.btn.dark{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.btn.soft{background:var(--card);color:var(--ink);box-shadow:none}
+.link{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+
+/* detalhes */
+.nav{background:rgba(22,22,22,.88);border:1px solid var(--line);box-shadow:none}
+.tog.on::after{background:var(--bg)}
+.rest{background:var(--ink);color:var(--bg)}
+.rest .t span{color:#6b675e}
+.rest button{background:rgba(0,0,0,.1)}
+.rest .fill{background:var(--bg)}
+.spark path{stroke:var(--ink)}
+.cf{background:rgba(0,0,0,.6)}
+.cf .bx{border:1px solid var(--line);border-bottom:0}
+.wd.today i{box-shadow:0 0 0 3px var(--bg),0 0 0 4.5px var(--ink)}
+
+/* tela final: bloco creme invertido */
+.fin{background:var(--ink);color:var(--bg)}
+.fin .lb{color:rgba(11,11,11,.65)!important}
+.fin .t56{font-size:76px}
+.fin em{-webkit-text-stroke:1.5px var(--bg)}
 </style>
 </head><body>
 <div class="app">
