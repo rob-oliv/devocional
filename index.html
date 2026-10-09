@@ -1,298 +1,384 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Mudança Salvador</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-/* Layout: painel de controle da mudança, hero com contagem regressiva, depois blocos de trabalho em grade */
-:root{--bg:#F6F1F3;--sf:#FFFFFF;--sf2:#EFE6EA;--fg:#2A1519;--mu:#7A6068;--bd:#E0D2D8;
---bordo:#6E1F2E;--rosa:#D63F7C;--rosa-s:#FBE3EC;--mil:#4F5D2F;--mil-s:#E6EBD3;--mos:#D9A22E;--mos-s:#FBF0D2;--ac-fg:#FFFFFF;--sh:0 1px 2px rgba(60,20,30,.06),0 6px 18px rgba(60,20,30,.06);
---fd:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;--fb:'Figtree','Segoe UI',system-ui,sans-serif;--fm:'DM Mono',ui-monospace,Menlo,monospace}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#180D11;--sf:#26151A;--sf2:#33202A;--fg:#F6E9EE;--mu:#B49AA5;--bd:#44303A;--bordo:#E58BA1;--rosa:#F0629A;--rosa-s:#44202F;--mil:#A9BC74;--mil-s:#2A3320;--mos:#E8B94F;--mos-s:#3A2F17;--sh:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.3);color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#180D11;--sf:#26151A;--sf2:#33202A;--fg:#F6E9EE;--mu:#B49AA5;--bd:#44303A;--bordo:#E58BA1;--rosa:#F0629A;--rosa-s:#44202F;--mil:#A9BC74;--mil-s:#2A3320;--mos:#E8B94F;--mos-s:#3A2F17;--sh:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.3);color-scheme:dark}
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font:15px/1.5 var(--fb);padding-inline:16px;padding-block:18px 60px}
-.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
-h1,h2,h3{font-family:var(--fd);margin:0;text-wrap:balance;letter-spacing:-.01em}
-h2{font-size:1.35rem;font-weight:800;color:var(--bordo)}
-.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-.sec-h p{margin:0;color:var(--mu);font-size:.85rem}
-.mono{font-family:var(--fm);font-variant-numeric:tabular-nums}
-button,input,select,textarea{font:inherit;color:inherit}
-button{cursor:pointer}
-:focus-visible{outline:3px solid var(--rosa);outline-offset:2px}
-/* hero */
-.hero{background:var(--bordo);color:#fff;border-radius:22px;padding:22px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;position:relative;overflow:hidden;box-shadow:var(--sh)}
-:root[data-theme="dark"] .hero,:root:not([data-theme="light"]) .hero{--hbg:#3b1019}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero{background:#3B1019}}
-:root[data-theme="dark"] .hero{background:#3B1019}
-.hero .stripes{position:absolute;right:-40px;top:-30px;width:240px;height:240px;border-radius:50%;background:repeating-radial-gradient(circle,var(--rosa) 0 14px,transparent 14px 28px);opacity:.28;pointer-events:none}
-.ring{position:relative;width:132px;height:132px}
-.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring .pc{position:absolute;inset:0;display:grid;place-items:center;font:800 1.9rem var(--fd)}
-.ring .pc small{display:block;font:500 .65rem var(--fb);opacity:.8;text-align:center;margin-top:-4px;letter-spacing:.06em;text-transform:uppercase}
-.hero h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800;line-height:1.05}
-.hero .msg{margin:6px 0 12px;opacity:.9}
-.chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:5px 12px;font-size:.82rem}
-.chip b{font-family:var(--fm);font-weight:500}
-.theme{position:absolute;right:14px;top:12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:999px;padding:4px 12px;font-size:.78rem;z-index:2}
-@media(max-width:560px){.hero{grid-template-columns:1fr;justify-items:start;padding-top:44px}.ring{width:108px;height:108px}}
-/* kpi */
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.kpi{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:14px;box-shadow:var(--sh);min-width:0}
-.kpi .l{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--mu)}
-.kpi .v{font:700 1.45rem var(--fm);margin-top:2px;overflow-wrap:anywhere}
-.kpi .s{font-size:.78rem;color:var(--mu)}
-.kpi.ok .v{color:var(--mil)}.kpi.warn .v{color:var(--mos)}.kpi.bad .v{color:var(--rosa)}
-.kpi.hl{background:var(--rosa);border-color:var(--rosa)}.kpi.hl .l,.kpi.hl .s{color:#fff;opacity:.9}.kpi.hl .v{color:#fff}
-/* budget bar */
-.bud{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:16px;box-shadow:var(--sh)}
-.bar{display:flex;height:30px;border-radius:10px;overflow:hidden;background:var(--sf2);margin:10px 0 8px}
-.bar i{display:block;height:100%;transition:width .5s}
-.leg{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--mu)}
-.leg span{display:inline-flex;align-items:center;gap:6px}.leg em{width:11px;height:11px;border-radius:3px;display:inline-block}
-/* items */
-.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
-.it{background:var(--sf);border:1px solid var(--bd);border-radius:18px;padding:16px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:12px;min-width:0}
-.it.done{border-color:var(--mil)}
-.it-h{display:flex;gap:12px;align-items:center}
-.ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex:none}
-.ic svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.it-h h3{font-size:1.1rem;font-weight:700}.it-h small{color:var(--mu)}
-.it-h .pr{margin-left:auto;text-align:right;font:700 1.15rem var(--fm)}
-.it-h .pr small{display:block;font:400 .72rem var(--fb)}
-.stp{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.stp button{border:1px solid var(--bd);background:var(--sf2);border-radius:10px;padding:7px 2px;font-size:.74rem;font-weight:600;color:var(--mu);min-width:0;transition:.2s}
-.stp button.on{background:var(--mil);border-color:var(--mil);color:#fff}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .stp button.on{color:#14200a}}
-:root[data-theme="dark"] .stp button.on{color:#14200a}
-.fld{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.fld label{display:flex;flex-direction:column;gap:2px;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mu);min-width:0}
-.fld .full{grid-column:1/-1}
-input,select,textarea{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:8px 10px;width:100%;min-width:0;font-size:.92rem;text-transform:none;letter-spacing:0;color:var(--fg)}
-.sum{background:var(--sf2);border-radius:12px;padding:9px 12px;font-size:.85rem;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
-/* deals */
-.fil{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.fil button{border:1px solid var(--bd);background:var(--sf);border-radius:999px;padding:6px 14px;font-weight:600;font-size:.84rem}
-.fil button.on{background:var(--rosa);border-color:var(--rosa);color:#fff}
-.deals{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:12px}
-.dl{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--sh);min-width:0}
-.dl .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
-.tag{font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:3px 9px;white-space:nowrap}
-.tag.best{background:var(--mil-s);color:var(--mil)}.tag.ref{background:var(--sf2);color:var(--mu)}.tag.warn{background:var(--mos-s);color:var(--mos)}.tag.cheap{background:var(--rosa-s);color:var(--rosa)}
-.dl h4{margin:0;font:700 .98rem var(--fb)}
-.dl .p{font:700 1.4rem var(--fm)}.dl .p s{font:400 .8rem var(--fm);color:var(--mu);margin-left:6px}
-.dl p{margin:0;font-size:.82rem;color:var(--mu)}
-.dl .ac{display:flex;gap:8px;margin-top:auto;flex-wrap:wrap}
-.btn{border-radius:10px;padding:8px 13px;font-weight:600;font-size:.84rem;border:1px solid var(--bd);background:var(--sf2);text-decoration:none;color:var(--fg);display:inline-block}
-.btn.pri{background:var(--rosa);border-color:var(--rosa);color:#fff}
-.btn:hover{filter:brightness(1.06)}
-/* sim */
-.panel{background:var(--sf);border:1px solid var(--bd);border-radius:18px;padding:16px;box-shadow:var(--sh)}
-.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:10px;margin-bottom:14px}
-.ctl label{display:flex;flex-direction:column;gap:3px;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mu)}
-.ctl .ck{flex-direction:row;align-items:center;gap:8px;text-transform:none;letter-spacing:0;font-size:.9rem;color:var(--fg)}
-.ctl .ck input{width:20px;height:20px;accent-color:var(--rosa)}
-.ctl input[type=range]{padding:0;accent-color:var(--rosa);border:none;background:none}
-.chart{overflow-x:auto}.chart svg{width:100%;min-width:560px;height:auto;display:block}
-.chart text{font:11px var(--fm);fill:var(--mu)}
-.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:10px}
-.res div{background:var(--sf2);border-radius:12px;padding:10px 12px;font-size:.82rem;color:var(--mu)}
-.res b{display:block;font:700 1.15rem var(--fm);color:var(--fg)}
-/* timeline */
-.tl{display:grid;gap:10px}
-.day{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:12px 14px;display:grid;grid-template-columns:78px 1fr;gap:12px;box-shadow:var(--sh)}
-.day.today{border-color:var(--rosa);box-shadow:0 0 0 2px var(--rosa-s),var(--sh)}
-.day .d{font:800 1.6rem var(--fd);line-height:1;color:var(--bordo)}.day .d small{display:block;font:600 .7rem var(--fb);letter-spacing:.07em;text-transform:uppercase;color:var(--mu);margin-top:3px}
-.day.move .d{color:var(--rosa)}
-.tk{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer}
-.tk input{width:20px;height:20px;margin-top:2px;accent-color:var(--mil);flex:none;padding:0}
-.tk span{min-width:0}.tk.x span{text-decoration:line-through;color:var(--mu)}
-/* expenses */
-.exf{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;margin-bottom:10px}
-@media(max-width:620px){.exf{grid-template-columns:1fr 1fr}.exf .btn{grid-column:1/-1}}
-.exl{display:grid;gap:6px}
-.ex{display:flex;gap:10px;align-items:center;justify-content:space-between;background:var(--sf2);border-radius:10px;padding:8px 12px}
-.ex button{border:none;background:none;color:var(--mu);font-size:1.1rem;padding:2px 8px}
-.empty{color:var(--mu);font-size:.88rem;padding:6px 2px}
-.note{color:var(--mu);font-size:.78rem}
-canvas.cf{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
-<div class="wrap" id="app">
-<section class="hero" id="hero"></section>
-<section><div class="kpis" id="kpis"></div></section>
-<section class="bud" id="bud"></section>
-<section><div class="sec-h"><h2>Compras</h2><p>Toque na etapa para avançar. Os números se recalculam sozinhos.</p></div><div class="items" id="items"></div></section>
-<section><div class="sec-h"><h2>Ofertas do 10/10</h2><p>Preços vistos em 09/10 e na madrugada do 10/10. Confirme tudo no site antes de pagar.</p></div><div class="fil" id="fil"></div><div class="deals" id="deals"></div></section>
-<section><div class="sec-h"><h2>Simulador de parcelas</h2><p>Veja o que muda quando o extra de dezembro entra.</p></div>
-<div class="panel">
-<div class="ctl">
-<label>Dinheiro disponível (R$)<input id="c-cash" type="number" inputmode="decimal" min="0" step="50"></label>
-<label>Extra de dezembro (R$)<input id="c-extra" type="number" inputmode="decimal" min="0" step="50"></label>
-<label>Primeira fatura<select id="c-first"></select></label>
-<label>Reserva mínima: <span class="mono" id="c-resv-t"></span><input id="c-reserve" type="range" min="0" max="3000" step="50"></label>
-<label class="ck"><input id="c-prepay" type="checkbox"> Adiantar parcelas com o extra</label>
-<label>Dia da mudança<input id="c-move" type="date"></label>
-</div>
-<div class="res" id="res"></div>
-<div class="chart" id="chart"></div>
-<p class="note">Barras vazadas: o que você pagaria sem adiantar. Barras rosa: com o extra de dezembro abatendo as últimas parcelas. Compras sem juros não ganham desconto ao adiantar, mas você se livra da dívida antes e libera o limite.</p>
-</div></section>
-<section><div class="sec-h"><h2>Rota até o dia 17</h2><p id="tl-p"></p></div><div class="tl" id="tl"></div></section>
-<section><div class="sec-h"><h2>Gastos extras</h2><p>Frete, tinta, botijão, lâmpada. Tudo sai do dinheiro disponível.</p></div>
-<div class="panel"><div class="exf"><input id="x-d" placeholder="O que foi?" maxlength="60"><input id="x-v" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Valor (R$)"><select id="x-c"><option>Tinta e pintura</option><option>Frete e montagem</option><option>Gás</option><option>Decoração</option><option>Casa</option><option>Outro</option></select><button class="btn pri" id="x-add" type="button">Adicionar</button></div><div class="exl" id="exl"></div></div></section>
-<p class="note" id="foot"></p>
-</div>
-<script>
-(function(){
-var KEY='mudanca-salvador-v1';
-var IC={sofa:'<path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3M3 14a2 2 0 0 1 4 0v1h10v-1a2 2 0 0 1 4 0v4H3zM6 18v2M18 18v2"/>',
-geladeira:'<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M6 10h12M9 6v2M9 13v3"/>',
-fogao:'<rect x="3" y="4" width="18" height="17" rx="2"/><circle cx="8" cy="8" r="1.5"/><circle cx="16" cy="8" r="1.5"/><rect x="6" y="12" width="12" height="6" rx="1"/>',
-tv:'<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M9 21h6M12 17v4"/>',
-cama:'<path d="M3 18V7M3 13h18v5M21 13v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="10" r="1.5"/>'};
-var META=[{id:'geladeira',n:'Geladeira',sub:'Electrolux DC35A, 260 L',c:'--rosa-s',f:'--rosa'},{id:'fogao',n:'Fogão',sub:'Itatiaia 4 bocas',c:'--mos-s',f:'--mos'},{id:'tv',n:'TV 43"',sub:'Smart, 4K se der',c:'--mil-s',f:'--mil'},{id:'sofa',n:'Sofá',sub:'Sofá na Caixa, bouclé cinza',c:'--rosa-s',f:'--bordo'},{id:'cama',n:'Cama e colchão',sub:'Presente dos pais',c:'--mos-s',f:'--mos'}];
-var STAGES=['Pesquisando','Comprado','Entregue','Instalado'];
-function defs(){return{ts:0,cfg:{cash:3000,extra:2000,reserve:1500,first:'2026-11',move:'2026-10-17',prepay:true},
-items:{geladeira:{price:1850,pix:0,cupom:0,method:'cartao',n:10,stage:0,date:'',link:'',note:''},
-fogao:{price:600,pix:0,cupom:0,method:'dinheiro',n:1,stage:0,date:'',link:'',note:''},
-tv:{price:1300,pix:0,cupom:0,method:'cartao',n:10,stage:0,date:'',link:'',note:''},
-sofa:{price:3379,pix:3041,cupom:0,method:'cartao',n:10,max:10,stage:0,date:'',link:'https://sofanacaixa.com.br/products/sofa-na-caixa-modular-3-lugares-em-boucle-poltrona-puff-canto-cinza',note:'Confirmar módulos com a loja'},
-cama:{price:0,pix:0,cupom:0,method:'dinheiro',n:1,stage:0,date:'',link:'',note:'Pedir aos pais'}},
-checks:{},exp:[]}}
-var TASKS=[
-['2026-10-10','Pedir autorização do proprietário para pintar e furar','a1'],['2026-10-10','Confirmar voltagem (110/220) e tipo de gás','a2'],['2026-10-10','Aproveitar o 10/10: fechar geladeira, fogão, TV e sofá','a3'],
-['2026-10-11','Medir porta, cozinha, sala e quarto','b1'],['2026-10-11','Orçar pintor e tinta','b2'],
-['2026-10-12','Chegar em Salvador e combinar quem recebe as entregas','c1'],
-['2026-10-13','Comprar tinta e material de pintura','d1'],['2026-10-13','Pintura, dia 1','d2'],
-['2026-10-14','Pintura, dia 2','e1'],['2026-10-14','Agendar entregas para depois da tinta seca','e2'],
-['2026-10-15','Receber geladeira e fogão','f1'],['2026-10-15','Instalar o gás','f2'],
-['2026-10-16','Receber TV, sofá e cama; montar o sofá','g1'],['2026-10-16','Transferir luz, água e internet','g2'],
-['2026-10-17','Dia da mudança','h1'],['2026-10-17','Primeira noite no apartamento','h2']];
-var DEALS=[
-{i:'tv',t:'best',tl:'Melhor aposta',s:'Mercado Livre',h:'Semp 43" 4K (43S62)',p:1300,w:1999,n:'4K no preço de uma Full HD. Visto no Promobit há cerca de 13 h.',u:'https://www.promobit.com.br/promocoes/tv-43/s/',a:{price:1300}},
-{i:'tv',t:'cheap',tl:'Mais barata',s:'Amazon',h:'Philco 43" Roku TV, HDR10',p:1219,w:1599,n:'Full HD. Outro anúncio estava a R$ 1.249 com parcelamento.',u:'https://www.promobit.com.br/promocoes/tv-43/s/',a:{price:1219}},
-{i:'tv',t:'ref',tl:'Alternativa',s:'Amazon',h:'Hisense 43" Full HD (43A4NV)',p:1299,w:1749,n:'Boa marca, Full HD, com opção parcelada.',u:'https://www.promobit.com.br/promocoes/tv-43/s/',a:{price:1299}},
-{i:'tv',t:'warn',tl:'Atenção',s:'Shopee',h:'AOC 43" Full HD Roku (43S5155)',p:1258.56,w:2314.27,n:'Marketplace: confira vendedor, nota fiscal e garantia. O preço "de" parece inflado.',u:'https://www.promobit.com.br/promocoes/tv-43/s/',a:{price:1258.56}},
-{i:'fogao',t:'ref',tl:'Preço-alvo',s:'Mercado Livre',h:'Itatiaia Electra Glass Plus 4 bocas',p:589,n:'Mesa de vidro. Oferta vista há 2 semanas e já encerrada. Use como meta, até R$ 650.',u:'https://www.promobit.com.br/promocoes/fogao-itatiaia/s/',a:{price:589}},
-{i:'fogao',t:'ref',tl:'Mais em conta',s:'Mercado Livre',h:'Itatiaia 4 bocas',p:545,n:'Oferta encerrada. Serve de teto para negociar.',u:'https://www.promobit.com.br/promocoes/fogao-itatiaia/s/',a:{price:545}},
-{i:'fogao',t:'ref',tl:'Referência',s:'Mercado Livre',h:'Itatiaia Star New 4 bocas, mesa inox',p:557.61,n:'Forno de 48 L. Oferta encerrada.',u:'https://www.promobit.com.br/promocoes/fogao-itatiaia/s/',a:{price:557.61}},
-{i:'sofa',t:'best',tl:'Já na página',s:'Sofá na Caixa',h:'10% de desconto no Pix',p:3041,w:3379,n:'Exige o valor em conta. Fica R$ 338 mais barato que no cartão.',u:'https://sofanacaixa.com.br/products/sofa-na-caixa-modular-3-lugares-em-boucle-poltrona-puff-canto-cinza',a:{method:'pix',n:1}},
-{i:'sofa',t:'warn',tl:'Testar no carrinho',s:'Cupom 250',h:'R$ 150 de desconto acima de R$ 3.000',p:150,n:'Código 250. A validade não está confirmada. Pode não somar com o Pix.',u:'https://thiagorodrigo.com.br/cupom-desconto-sofa-na-caixa/',a:{cupom:150},cu:1},
-{i:'sofa',t:'warn',tl:'Testar no carrinho',s:'Cupom PRA',h:'10% na primeira compra',p:338,n:'Código PRA. Vale só para quem nunca comprou na loja. Pode não somar com o Pix.',u:'https://thiagorodrigo.com.br/cupom-desconto-sofa-na-caixa/',a:{cupom:338},cu:1},
-{i:'sofa',t:'warn',tl:'Atenção',s:'Frete',h:'Frete grátis só no Sul e Sudeste',p:0,n:'Para Salvador, o frete é calculado pelo CEP. Some o valor em Gastos extras.',u:'https://sofanacaixa.com.br/products/sofa-na-caixa-modular-3-lugares-em-boucle-poltrona-puff-canto-cinza',info:1},
-{i:'geladeira',t:'ref',tl:'Referência',s:'Amazon',h:'Electrolux DC35A, 220 V',p:1839,n:'Oferta já encerrada. É o preço-alvo para o dia 10/10.',u:'https://www.mercadolivre.com.br/geladeira-electrolux-cycle-defrost-260l-super-freezer-duplex-branca-dc35a/p/MLB8017585',a:{price:1839}},
-{i:'geladeira',t:'warn',tl:'Caro',s:'Lojas Nosso Sol',h:'DC35A 220 V em 12x sem juros',p:2499.9,w:2999.9,n:'12x de R$ 208,33. O prazo é maior, mas o total passa de R$ 600 a mais.',u:'https://www.lojasnossolar.com.br/geladeira-electrolux-duplex-dc35a-cycle-defrost-260l-branca220v/p/34069',a:{price:2499.9,n:12}},
-{i:'geladeira',t:'ref',tl:'Confira',s:'Mercado Livre',h:'Página do produto que você escolheu',p:0,n:'Veja o preço e o parcelamento do dia e digite no cartão da geladeira.',u:'https://www.mercadolivre.com.br/geladeira-electrolux-cycle-defrost-260l-super-freezer-duplex-branca-dc35a/p/MLB8017585',info:1}];
-var S=load(),filt='all',db=null,ref=null,saving=false,dirty=false,tmr=null;
-function load(){var d=defs();try{var r=localStorage.getItem(KEY);if(r)return merge(d,JSON.parse(r))}catch(e){}return d}
-function merge(d,o){if(!o)return d;d.ts=o.ts||0;Object.assign(d.cfg,o.cfg||{});for(var k in d.items)Object.assign(d.items[k],(o.items||{})[k]||{});d.checks=o.checks||{};d.exp=o.exp||[];return d}
-function $(i){return document.getElementById(i)}
-function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-var F=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}),F0=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
-function R(v){return F.format(v||0)}function R0(v){return F0.format(v||0)}
-function num(v){var x=parseFloat(String(v).replace(',','.'));return isFinite(x)&&x>0?x:0}
-var MN=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-function mlabel(first,i){var p=first.split('-'),y=+p[0],m=+p[1]-1+i;y+=Math.floor(m/12);m=((m%12)+12)%12;return MN[m]+'/'+String(y).slice(2)}
-function mdiff(a,b){var p=a.split('-'),q=b.split('-');return(+p[0]-+q[0])*12+(+p[1]-+q[1])}
-function eff(it){var p=(it.method!=='cartao'&&it.pix>0)?it.pix:it.price;return Math.max(0,p-(it.cupom||0))}
-function nOf(it){if(it.method!=='cartao')return 1;var n=Math.max(1,Math.round(it.n||1));if(it.max)n=Math.min(n,it.max);return Math.min(n,24)}
-function calc(){var c=S.cfg,tot=0,cash=0,card=0,rows=[],L=10;
-META.forEach(function(m){var it=S.items[m.id],e=eff(it),n=nOf(it);tot+=e;if(it.method==='cartao'){card+=e;L=Math.max(L,n)}else cash+=e;rows.push({id:m.id,e:e,n:n,card:it.method==='cartao'})});
-var ex=S.exp.reduce(function(a,x){return a+x.v},0),left=c.cash-cash-ex;
-var base=[],i,k;for(i=0;i<L;i++)base.push(0);
-var ev=[];rows.forEach(function(r){if(r.card&&r.e>0)for(k=0;k<r.n;k++){base[k]+=r.e/r.n;ev.push({m:k,a:r.e/r.n})}});
-var dez=mdiff('2026-12',c.first),with_=base.slice(),used=0;
-if(c.prepay&&c.extra>0&&dez>=0&&dez<L){var fut=ev.filter(function(x){return x.m>dez}).sort(function(a,b){return b.m-a.m}),b=c.extra;fut.forEach(function(x){if(b<=0)return;var t=Math.min(x.a,b);with_[x.m]-=t;b-=t;used+=t})}
-function endI(a){var l=-1;a.forEach(function(v,j){if(v>.5)l=j});return l}
-return{tot:tot,cash:cash,card:card,ex:ex,left:left,base:base,w:with_,L:L,used:used,e0:endI(base),e1:endI(with_),dez:dez,
-paidTot:tot,saved:0}}
-function score(){var st=0;META.forEach(function(m){st+=S.items[m.id].stage/3});st/=META.length;var ck=0;TASKS.forEach(function(t){if(S.checks[t[2]])ck++});ck/=TASKS.length;return{p:Math.round((st*.55+ck*.45)*100),st:st,ck:ck}}
-function persist(){S.ts=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}dirty=true;clearTimeout(tmr);tmr=setTimeout(flush,700)}
-function flush(){if(!ref||saving||!dirty)return;saving=true;dirty=false;var snap=JSON.stringify(S);ref.set({json:snap,ts:S.ts}).catch(function(){}).then(function(){saving=false;if(dirty)flush()})}
-function commit(){persist();renderAll()}
-function daysTo(){var p=S.cfg.move.split('-'),t=new Date(+p[0],+p[1]-1,+p[2]),n=new Date();n=new Date(n.getFullYear(),n.getMonth(),n.getDate());return Math.round((t-n)/864e5)}
-function renderHero(){var sc=score(),d=daysTo(),C=2*Math.PI*54,off=C*(1-sc.p/100);
-var m=sc.p>=100?'Tudo pronto. Boa mudança!':sc.p>=75?'Reta final. Falta pouco.':sc.p>=40?'Já passou da metade do caminho.':sc.p>=10?'Começou bem. Siga a rota.':'Tudo por fazer. Comece pelas ofertas de hoje.';
-var cd=d>1?'faltam <b>'+d+'</b> dias':d===1?'falta <b>1</b> dia':d===0?'<b>é hoje</b>':'mudança <b>feita</b>';
-var bought=META.filter(function(m){return S.items[m.id].stage>=1}).length,deliv=META.filter(function(m){return S.items[m.id].stage>=2}).length;
-var dt=S.cfg.move.split('-').reverse().slice(0,2).join('/');
-$('hero').innerHTML='<div class="stripes"></div><button class="theme" id="th" type="button">Tema</button><div class="ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="10"/><circle cx="60" cy="60" r="54" fill="none" stroke="#F58AB3" stroke-width="10" stroke-linecap="round" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" style="transition:stroke-dashoffset .8s"/></svg><div class="pc"><div>'+sc.p+'%<small>da mudança</small></div></div></div><div style="position:relative"><h1>Rumo a Salvador, dia '+dt+'</h1><p class="msg">'+m+'</p><div class="chips"><span class="chip">'+cd+'</span><span class="chip"><b>'+bought+'/'+META.length+'</b> comprados</span><span class="chip"><b>'+deliv+'/'+META.length+'</b> entregues</span><span class="chip"><b>'+TASKS.filter(function(t){return S.checks[t[2]]}).length+'/'+TASKS.length+'</b> tarefas</span></div></div>'}
-function renderKpis(){var k=calc(),c=S.cfg,mon=k.base[0]||0,mon2=k.w[0]||0,okL=k.left>=c.reserve,nrL=k.left>=0;
-var h='';
-h+='<div class="kpi hl"><div class="l">Total do plano</div><div class="v">'+R0(k.tot)+'</div><div class="s">'+R0(k.cash+k.ex)+' em dinheiro, '+R0(k.card)+' no cartão</div></div>';
-h+='<div class="kpi"><div class="l">Fatura do cartão por mês</div><div class="v">'+R0(mon)+'</div><div class="s">'+(k.card>0?'por '+(k.e0+1)+' meses':'sem compras no cartão')+'</div></div>';
-h+='<div class="kpi '+(okL?'ok':nrL?'warn':'bad')+'"><div class="l">Dinheiro que sobra</div><div class="v">'+R0(k.left)+'</div><div class="s">'+(okL?'acima da reserva de '+R0(c.reserve):nrL?'abaixo da reserva de '+R0(c.reserve):'faltam '+R0(-k.left))+'</div></div>';
-h+='<div class="kpi ok"><div class="l">Dívida zera em</div><div class="v">'+(k.card>0?mlabel(c.first,k.e1):'sem dívida')+'</div><div class="s">'+(k.e1<k.e0?'sem o extra seria '+mlabel(c.first,k.e0):'sem adiantar')+'</div></div>';
-$('kpis').innerHTML=h;
-var cashSp=k.cash,pct=function(v){return Math.max(0,Math.min(100,v/Math.max(1,c.cash)*100)).toFixed(1)},rest=Math.max(0,k.left);
-$('bud').innerHTML='<div class="sec-h" style="margin:0"><h2>Seu dinheiro</h2><p>'+R0(c.cash)+' disponíveis</p></div><div class="bar"><i style="width:'+pct(cashSp)+'%;background:var(--rosa)"></i><i style="width:'+pct(k.ex)+'%;background:var(--mos)"></i><i style="width:'+pct(rest)+'%;background:var(--mil)"></i></div><div class="leg"><span><em style="background:var(--rosa)"></em>Compras à vista '+R0(cashSp)+'</span><span><em style="background:var(--mos)"></em>Extras '+R0(k.ex)+'</span><span><em style="background:var(--mil)"></em>Sobra '+R0(Math.max(0,k.left))+'</span></div>'+(k.left<0?'<p class="note" style="color:var(--rosa);margin:8px 0 0">As compras à vista passam do dinheiro disponível. Mude algum item para o cartão.</p>':'')}
-function pill(lbl,sel){return sel}
-function renderItems(){var h='';META.forEach(function(m){var it=S.items[m.id],e=eff(it),n=nOf(it),done=it.stage===3;
-var st='';STAGES.forEach(function(s,i){st+='<button type="button" data-a="stage" data-id="'+m.id+'" data-v="'+i+'" class="'+(it.stage===i?'on':'')+'">'+s+'</button>'});
-var ns='';[1,2,3,4,5,6,8,10,12,15,18,24].forEach(function(v){if(!it.max||v<=it.max)ns+='<option value="'+v+'"'+(n===v?' selected':'')+'>'+v+'x</option>'});
-var sum=it.method==='cartao'?'<span>Você paga <b class="mono">'+R(e)+'</b></span><span class="mono">'+n+'x de '+R(e/n)+'</span>':'<span>Você paga <b class="mono">'+R(e)+'</b></span><span>'+(it.method==='pix'?'no Pix':'em dinheiro')+'</span>';
-h+='<article class="it'+(done?' done':'')+'"><div class="it-h"><div class="ic" style="background:var('+m.c+');color:var('+m.f+')"><svg viewBox="0 0 24 24">'+IC[m.id]+'</svg></div><div><h3>'+m.n+'</h3><small>'+m.sub+'</small></div><div class="pr">'+R0(e)+'<small>'+STAGES[it.stage]+'</small></div></div><div class="stp">'+st+'</div><div class="fld">'+
-'<label>Preço (R$)<input type="number" inputmode="decimal" min="0" step="0.01" data-a="f" data-id="'+m.id+'" data-k="price" value="'+(it.price||'')+'"></label>'+
-'<label>Preço no Pix (R$)<input type="number" inputmode="decimal" min="0" step="0.01" data-a="f" data-id="'+m.id+'" data-k="pix" value="'+(it.pix||'')+'" placeholder="opcional"></label>'+
-'<label>Cupom (R$ de desconto)<input type="number" inputmode="decimal" min="0" step="0.01" data-a="f" data-id="'+m.id+'" data-k="cupom" value="'+(it.cupom||'')+'" placeholder="0"></label>'+
-'<label>Pagamento<select data-a="f" data-id="'+m.id+'" data-k="method"><option value="cartao"'+(it.method==='cartao'?' selected':'')+'>Cartão</option><option value="pix"'+(it.method==='pix'?' selected':'')+'>Pix</option><option value="dinheiro"'+(it.method==='dinheiro'?' selected':'')+'>Dinheiro</option></select></label>'+
-(it.method==='cartao'?'<label>Parcelas'+(it.max?' (máx. '+it.max+'x)':'')+'<select data-a="f" data-id="'+m.id+'" data-k="n">'+ns+'</select></label>':'<label>Parcelas<input value="À vista" disabled></label>')+
-'<label>Entrega prevista<input type="date" data-a="f" data-id="'+m.id+'" data-k="date" value="'+esc(it.date)+'"></label>'+
-'<label class="full">Link da compra<input type="url" data-a="f" data-id="'+m.id+'" data-k="link" value="'+esc(it.link)+'" placeholder="cole o link"></label>'+
-'<label class="full">Observação<input type="text" maxlength="90" data-a="f" data-id="'+m.id+'" data-k="note" value="'+esc(it.note)+'"></label></div><div class="sum">'+sum+(it.link?'<a class="mono" style="color:var(--rosa)" target="_blank" rel="noopener" href="'+esc(it.link)+'">abrir link</a>':'')+'</div></article>'});
-$('items').innerHTML=h}
-function renderDeals(){var f=[['all','Todas'],['tv','TV'],['fogao','Fogão'],['sofa','Sofá'],['geladeira','Geladeira']],h='';
-f.forEach(function(x){h+='<button type="button" data-a="fil" data-v="'+x[0]+'" class="'+(filt===x[0]?'on':'')+'">'+x[1]+'</button>'});$('fil').innerHTML=h;
-h='';DEALS.forEach(function(d,i){if(filt!=='all'&&d.i!==filt)return;
-var pr=d.info?'':'<div class="p">'+(d.cu?'−':'')+R(d.p)+(d.w?'<s>'+R(d.w)+'</s>':'')+'</div>';
-h+='<article class="dl"><div class="top"><span class="tag '+d.t+'">'+esc(d.tl)+'</span><span class="note">'+esc(d.s)+'</span></div><h4>'+esc(d.h)+'</h4>'+pr+'<p>'+esc(d.n)+'</p><div class="ac"><a class="btn" target="_blank" rel="noopener" href="'+esc(d.u)+'">Ver oferta</a>'+(d.a?'<button class="btn pri" type="button" data-a="apply" data-v="'+i+'">Usar no plano</button>':'')+'</div></article>'});
-$('deals').innerHTML=h}
-function renderSim(){var k=calc(),c=S.cfg,i;
-$('c-resv-t').textContent=R0(c.reserve);
-var sav=k.used;
-$('res').innerHTML='<div>1ª fatura<b>'+R0(k.base[0])+'</b></div><div>Extra abate<b>'+R0(k.used)+'</b></div><div>Última parcela sem extra<b>'+(k.card>0?mlabel(c.first,k.e0):'-')+'</b></div><div>Última parcela com extra<b>'+(k.card>0?mlabel(c.first,k.e1):'-')+'</b></div>';
-var L=k.L,W=720,H=270,pl=44,pb=30,pt=22,bw=(W-pl-10)/L,mx=Math.max.apply(null,k.base.concat([100])),top=Math.ceil(mx/200)*200,
-y=function(v){return pt+(H-pt-pb)*(1-v/top)},s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Fatura mensal prevista do cartão">';
-for(i=0;i<=4;i++){var gv=top*i/4;s+='<line x1="'+pl+'" x2="'+W+'" y1="'+y(gv)+'" y2="'+y(gv)+'" stroke="var(--bd)" stroke-width="1"/><text x="'+(pl-6)+'" y="'+(y(gv)+4)+'" text-anchor="end">'+Math.round(gv)+'</text>'}
-for(i=0;i<L;i++){var x0=pl+i*bw+bw*.14,w=bw*.72,b=k.base[i],a=k.w[i],isD=i===k.dez;
-s+='<g><title>'+mlabel(c.first,i)+': sem extra '+R(b)+', com extra '+R(a)+'</title>';
-s+='<rect x="'+x0+'" y="'+y(b)+'" width="'+w+'" height="'+Math.max(0,y(0)-y(b))+'" rx="4" fill="none" stroke="var(--mu)" stroke-width="1.5" stroke-dasharray="4 3"/>';
-if(a>.5)s+='<rect x="'+x0+'" y="'+y(a)+'" width="'+w+'" height="'+Math.max(0,y(0)-y(a))+'" rx="4" fill="var(--rosa)"/><text x="'+(x0+w/2)+'" y="'+(y(a)-5)+'" text-anchor="middle" style="fill:var(--fg)">'+Math.round(a)+'</text>';
-s+='<text x="'+(x0+w/2)+'" y="'+(H-10)+'" text-anchor="middle" '+(isD?'style="fill:var(--bordo);font-weight:600"':'')+'>'+mlabel(c.first,i)+'</text></g>'}
-if(k.dez>=0&&k.dez<L){var dx=pl+k.dez*bw+bw/2;s+='<text x="'+dx+'" y="12" text-anchor="middle" style="fill:var(--bordo);font-weight:600">extra entra</text>'}
-$('chart').innerHTML=s+'</svg>'}
-function renderTl(){var days={},h='',today=new Date(),tk=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0'),DW=['dom','seg','ter','qua','qui','sex','sáb'];
-TASKS.forEach(function(t){(days[t[0]]=days[t[0]]||[]).push(t)});
-Object.keys(days).sort().forEach(function(d){var p=d.split('-'),dt=new Date(+p[0],+p[1]-1,+p[2]),all=days[d].every(function(t){return S.checks[t[2]]});
-h+='<div class="day'+(d===tk?' today':'')+(d===S.cfg.move?' move':'')+'"><div class="d">'+p[2]+'/'+p[1]+'<small>'+DW[dt.getDay()]+(all?' · ok':'')+'</small></div><div>';
-days[d].forEach(function(t){var x=S.checks[t[2]];h+='<label class="tk'+(x?' x':'')+'"><input type="checkbox" data-a="chk" data-id="'+t[2]+'"'+(x?' checked':'')+'><span>'+esc(t[1])+'</span></label>'});h+='</div></div>'});
-$('tl').innerHTML=h;$('tl-p').textContent=TASKS.filter(function(t){return S.checks[t[2]]}).length+' de '+TASKS.length+' tarefas feitas'}
-function renderExp(){var h='',t=0;S.exp.forEach(function(x,i){t+=x.v;h+='<div class="ex"><span>'+esc(x.d)+' <span class="note">'+esc(x.c)+'</span></span><span class="mono">'+R(x.v)+'<button type="button" aria-label="Remover" data-a="delx" data-v="'+i+'">×</button></span></div>'});
-$('exl').innerHTML=h?h+'<div class="ex" style="background:none;font-weight:700"><span>Total</span><span class="mono">'+R(t)+'</span></div>':'<div class="empty">Nenhum gasto extra ainda. O primeiro costuma ser o frete do sofá.</div>'}
-function renderCfg(){var c=S.cfg;$('c-cash').value=c.cash;$('c-extra').value=c.extra;$('c-reserve').value=c.reserve;$('c-prepay').checked=!!c.prepay;$('c-move').value=c.move;
-var o='';['2026-10','2026-11','2026-12'].forEach(function(m){o+='<option value="'+m+'"'+(c.first===m?' selected':'')+'>'+mlabel(m,0)+'</option>'});$('c-first').innerHTML=o}
-function renderAll(){renderHero();renderKpis();renderItems();renderDeals();renderSim();renderTl();renderExp();$('foot').textContent='Preços são estimativas de pesquisa (09/10/2026) e mudam rápido, principalmente no 10/10. Seus dados ficam salvos neste painel.'}
-function boom(){if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)return;var c=document.createElement('canvas');c.className='cf';document.body.appendChild(c);var x=c.getContext('2d'),w=c.width=innerWidth,h=c.height=innerHeight,col=['#D63F7C','#D9A22E','#4F5D2F','#6E1F2E','#F58AB3'],P=[],i;
-for(i=0;i<90;i++)P.push({x:w/2,y:h*.35,vx:(Math.random()-.5)*14,vy:-Math.random()*13-3,r:Math.random()*6+3,c:col[i%5],a:Math.random()*6});
-var t0=performance.now();(function f(t){var e=t-t0;x.clearRect(0,0,w,h);P.forEach(function(p){p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.a+=.2;x.save();x.translate(p.x,p.y);x.rotate(p.a);x.fillStyle=p.c;x.globalAlpha=Math.max(0,1-e/1800);x.fillRect(-p.r,-p.r/2,p.r*2,p.r);x.restore()});if(e<1800)requestAnimationFrame(f);else c.remove()})(t0)}
-document.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a;
-if(a==='stage'){var it=S.items[b.dataset.id],v=+b.dataset.v;it.stage=(it.stage===v&&v>0)?v-1:v;commit();if(it.stage===3)boom()}
-else if(a==='fil'){filt=b.dataset.v;renderDeals()}
-else if(a==='apply'){var d=DEALS[+b.dataset.v],it2=S.items[d.i];Object.assign(it2,d.a);if(d.a.price&&!d.a.n&&it2.method==='cartao'&&!it2.n)it2.n=10;if(it2.stage===0&&!d.cu&&d.a.price)it2.stage=0;commit();b.textContent='Aplicado';setTimeout(function(){b.textContent='Usar no plano'},1400)}
-else if(a==='delx'){S.exp.splice(+b.dataset.v,1);commit()}});
-document.addEventListener('change',function(e){var t=e.target,a=t.dataset&&t.dataset.a;if(a==='f'){var it=S.items[t.dataset.id],k=t.dataset.k;if(['price','pix','cupom'].indexOf(k)>=0)it[k]=num(t.value);else if(k==='n')it.n=+t.value;else it[k]=t.value;commit()}
-else if(a==='chk'){S.checks[t.dataset.id]=t.checked;var all=TASKS.every(function(x){return S.checks[x[2]]});commit();if(t.checked&&all)boom()}});
-function cfgIn(id,k,isNum){$(id).addEventListener('input',function(){var v=this.type==='checkbox'?this.checked:isNum?num(this.value):this.value;S.cfg[k]=v;persist();renderHero();renderKpis();renderSim()})}
-cfgIn('c-cash','cash',1);cfgIn('c-extra','extra',1);cfgIn('c-reserve','reserve',1);cfgIn('c-prepay','prepay');cfgIn('c-first','first');cfgIn('c-move','move');
-$('c-reserve').addEventListener('input',function(){S.cfg.reserve=+this.value});
-$('x-add').addEventListener('click',function(){var d=$('x-d').value.trim(),v=num($('x-v').value);if(!d||!v){$('x-d').focus();return}S.exp.unshift({d:d,v:v,c:$('x-c').value});$('x-d').value='';$('x-v').value='';commit()});
-document.addEventListener('click',function(e){if(e.target.id==='th'){var r=document.documentElement,dk=r.dataset.theme?r.dataset.theme==='dark':(matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=dk?'light':'dark'}});
-renderCfg();renderAll();
-window.__t={calc:calc,S:function(){return S}};
-(async function(){try{var c=window.claude;if(!c||!c.use)return;db=await c.use('db');if(!db)return;ref=db.doc('tracker/state');ref.onSnapshot(function(sn){if(!sn.exists||sn.metadata.hasPendingWrites)return;var r=sn.data();if(!r||!r.json)return;try{var o=JSON.parse(r.json);if((o.ts||0)>S.ts){S=merge(defs(),o);S.ts=o.ts;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}renderCfg();renderAll()}}catch(e){}},function(){});if(S.ts>0){dirty=true;flush()}}catch(e){}})();
-})();
-</script>
-
-</body></html>
+206	43		249
+198	426	4580	624
+163	290		453
+124	218	3004	342
+121	103	1164	224
+120	114	15692	234
+107	105		212
+97	174	597	271
+94	132		226
+94	101	2155	195
+90	168	1276	258
+89	65	627	154
+88	126		214
+87	83	818	170
+84	346	8950	430
+83	185	4190	268
+77	229	5123	306
+75	366	1092	441
+75	74		149
+74	411	14719	485
+74	3	872	77
+74	88	968	162
+72	41		113
+70	182		252
+70	132	2018	202
+68	81	703	149
+68	3	3156	71
+66	510	16906	576
+64	59	654	123
+63	399		462
+61	930	2236	991
+60	77	1594	137
+58	179	3905	237
+58	71	1238	129
+58	56	1350	114
+57	229		286
+56	87	512	143
+56	73		129
+56	73		129
+56	57	167	113
+55	117		172
+51	155		206
+50	39	1232	89
+49	133		182
+49	71		120
+48	319		367
+48	3		51
+47	62	283	109
+45	30	423	75
+44	173	4377	217
+44	65		109
+44	37	619	81
+42	127	4313	169
+42	72		114
+41	274	9017	315
+41	82	1987	123
+41	70		111
+41	64	938	105
+40	86		126
+40	3	1206	43
+38	77	2409	115
+38	68		106
+38	65		103
+38	33	279	71
+36	59	612	95
+36	46		82
+36	35		71
+35	81		116
+35	44	128	79
+35	33	469	68
+35	3	795	38
+32	61	837	93
+32	39	704	71
+31	192	2886	223
+31	140	5204	171
+31	134	2788	165
+30	352		382
+30	158	3013	188
+30	83	1336	113
+30	68		98
+30	40	1118	70
+28	77	1338	105
+28	73		101
+28	57	302	85
+28	49		77
+27	65	1665	92
+27	34	1325	61
+26	209	513	235
+26	57	959	83
+26	39	640	65
+28	34	586	62
+25	22	127	47
+24	42		66
+24	3		27
+23	49	1983	72
+22	106	2950	128
+22	64		86
+22	58		80
+22	37		59
+22	29	134	51
+22	25	1635	47
+22	3		25
+21	56	1228	77
+21	22		43
+21	3		24
+20	82	1825	102
+20	57	1110	77
+19	512	1103	531
+19	49		68
+19	49	498	68
+19	29	664	48
+18	70	3679	88
+18	41	404	59
+18	34	1081	52
+18	3		21
+17	251	2257	268
+17	89	1994	106
+17	64	2375	81
+17	56	1139	73
+18	42	920	60
+17	28	242	45
+17	3	945	20
+21	555	32032	576
+16	150		166
+16	115	2165	131
+16	41	1040	57
+16	37	1024	53
+16	34	720	50
+16	23		39
+16	22		38
+16	19	225	35
+15	75	330	90
+15	71	1216	86
+15	47	2070	62
+15	45	1006	60
+15	23		38
+15	12	487	27
+15	3		18
+14	36	985	50
+14	31	559	45
+14	27		41
+14	18		32
+14	3	1405	17
+14	3	13832	17
+14	101		115
+13	78	1108	91
+13	73		86
+13	62	568	75
+13	46	555	59
+13	45	1193	58
+13	3	473	16
+13	3		16
+12	131	4259	143
+12	47	496	59
+12	45	970	57
+13	40		53
+12	23	87	35
+12	20	90	32
+12	19		31
+12	19		31
+12	18		30
+12	17		29
+12	15	722	27
+12	3	350	15
+11	231	29953	242
+11	51	1942	62
+11	26	487	37
+11	25		36
+11	19		30
+11	16	355	27
+11	3	83	14
+10	53		63
+10	53	2266	63
+10	40	238	50
+10	30		40
+10	27		37
+10	27		37
+10	25	837	35
+10	20		30
+10	9		19
+9	1575	9766	1584
+9	99	1994	108
+9	79	2556	88
+9	34	1048	43
+9	32		41
+9	22	401	31
+9	21		30
+9	18	1231	27
+9	17		26
+9	16		25
+9	7		16
+9	3		12
+8	65	519	73
+8	56		64
+8	38		46
+8	21	407	29
+8	18		26
+8	16	548	24
+8	13	407	21
+8	9	230	17
+8	3	773	11
+8	3	452	11
+7	105	2631	112
+7	77		84
+7	48		55
+7	29		36
+7	25	28692	32
+7	25		32
+7	24		31
+7	22	623	29
+7	21		28
+7	19	631	26
+7	14		21
+7	8		15
+6	166		172
+6	88	433	94
+6	45		51
+6	35		41
+6	29		35
+6	22		28
+6	20	330	26
+6	19		25
+6	17		23
+6	15	134	21
+6	16		22
+6	14	223	20
+6	9	614	15
+6	3	977	9
+6	3	325	9
+3	68	1485	71
+5	61		66
+5	47	3505	52
+5	36	1861	41
+5	36	1161	41
+5	35		40
+5	26		31
+5	26		31
+5	25	541	30
+5	21		26
+5	19		24
+5	16	555	21
+5	14	314	19
+5	9		14
+5	10	670	15
+5	3	629	8
+4	72	3234	76
+4	32	1123	36
+2	26	741	28
+4	22	727	26
+4	17		21
+4	16	485	20
+4	11	265	15
+4	10		14
+7	8	288	15
+4	4		8
+4	3	199	7
+4	3	804	7
+3	91	605	94
+3	39	1359	42
+3	38	1377	41
+3	36		39
+3	33	823	36
+3	32		35
+3	27		30
+3	22		25
+3	20		23
+3	17		20
+3	15	272	18
+5	15	534	20
+3	14		17
+3	13	241	16
+3	13		16
+3	11	490	14
+3	10	482	13
+3	8		11
+3	8		11
+3	8	270	11
+3	7	446	10
+3	7	250	10
+3	5	212	8
+3	5	278	8
+2	159	734	161
+2	67		69
+2	48	1485	50
+3	41	2037	44
+2	34		36
+2	29	1012	31
+2	24	626	26
+2	19		21
+2	16	824	18
+2	14		16
+2	13	1304	15
+2	12		14
+2	11	580	13
+2	10		12
+2	10	196	12
+2	9	153	11
+2	9		11
+2	9		11
+2	8	623	10
+2	8		10
+2	5	474	7
+2	5		7
+2	5	236	7
+2	3		5
+2	3		5
+2	3		5
+2	3		5
+2	1	19	3
+3	86	399	89
+1	80	3184	81
+1	29	1579	30
+1	28	1253	29
+1	27	1257	28
+1	21		22
+1	21		22
+1	22	1063	23
+1	19	312	20
+2	19	457	21
+1	16	454	17
+4	16	253	20
+1	14		15
+1	12	534	13
+1	10	529	11
+1	9		10
+1	8		9
+0	8		8
+1	7	529	8
+1	7		8
+1	7	675	8
+2	7		9
+1	6		7
+1	6	174	7
+1	5		6
+1	5	330	6
+1	4		5
+1	4	224	5
+1	3		4
+1	3		4
+1	3		4
+1	2		3
+1	2	263	3
+0	205		205
+0	153		153
+0	32	1556	32
+0	32		32
+0	29	1027	29
+0	27		27
+0	25	920	25
+0	21		21
+0	18	416	18
+0	15	283	15
+0	13		13
+0	12	705	12
+0	10	103	10
+0	9		9
+0	9		9
+0	8		8
+0	7		7
+0	7	364	7
+0	6		6
+0	6		6
+0	6	665	6
+0	5	195	5
+0	4		4
+0	4	129	4
+0	4		4
+0	4	34	4
+0	4		4
+0	3		3
+0	3	113	3
+0	3	145	3
+0	3	309	3
+0	3	81	3
+0	3	172	3
+0	3	302	3
+2	3	263	5
+0	2		2
+0	2		2
+0	2	41	2
+0	1	172	1
+0	1		1
+0	1	353	1
+0	0	7	0
